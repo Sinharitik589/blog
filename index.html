@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+      const loadContact = async () => {
+        history.pushState({}, "", "/contact");
+        document.getElementById("products").innerHTML = "";
+        document.getElementById("contact").innerHTML = "Get contact details";
+        const res = await axios.get(
+          "https://jsonplaceholder.typicode.com/todos/1"
+        );
+        const data = await res.data;
+
+        console.log(data);
+      };
+
+      function loadProduct() {
+        history.pushState({}, "", "/product");
+        document.getElementById("contact").innerHTML = "";
+        document.getElementById("products").innerHTML = "Get product details";
+      }
+    </script>
+  </head>
+  <body>
+    <h1>hello</h1>
+    <button onclick="loadProduct()">product</button>
+    <button onclick="loadContact()">contact</button>
+    <div id="contact"></div>
+    <div id="products"></div>
+    <a href="./about.html">About</a>
+  </body>
+</html>
