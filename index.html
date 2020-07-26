@@ -12,13 +12,7 @@
         document.getElementById("products").innerHTML = "";
         document.getElementById("contact").innerHTML = "Get contact details";
         const res = await axios.get(
-          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api",
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-            },
-          }
+          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
         );
         const data = await res.data;
 
