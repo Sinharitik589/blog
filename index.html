@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript">
       const loadContact = async () => {
@@ -8,7 +12,13 @@
         document.getElementById("products").innerHTML = "";
         document.getElementById("contact").innerHTML = "Get contact details";
         const res = await axios.get(
-          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
+          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api",
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
         );
         const data = await res.data;
 
@@ -25,7 +35,7 @@
   <body>
     <h1>hello</h1>
     <button onclick="loadProduct()">product</button>
-    <button onclick="loadContact()">contact</button>
+    <button onclick="loadContact()">contacts</button>
     <div id="contact"></div>
     <div id="products"></div>
     <a href="about?techblogs">About</a>
