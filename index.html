@@ -8,7 +8,7 @@
         document.getElementById("products").innerHTML = "";
         document.getElementById("contact").innerHTML = "Get contact details";
         const res = await axios.get(
-          "https://jsonplaceholder.typicode.com/todos/1"
+          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
         );
         const data = await res.data;
 
