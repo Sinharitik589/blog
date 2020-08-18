@@ -90,7 +90,7 @@
         let component = document.getElementById("main");
 
         data.map((value, i) => {
-          let element = `<a href="/about.html?${replace(
+          let element = `<a href="about?${replace(
             value.heading
           )}"><div class="component" id=${i} onclick="handleClick(
             this.id
