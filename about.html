@@ -1,15 +1,147 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/about.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
     <script type="text/javascript">
-      const handleurl = () => {
-        console.log(window.location.href.split("?")[1]);
+      const replace = (str) => {
+        let array = str;
+        for (i = 0; i < str.length; i++) {
+          array = array.replace("_", " ");
+        }
+        return array;
+      };
+
+      const handleUrl = async () => {
+        const res = await axios.get(
+          `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${replace(
+            window.location.href.split("?")[1]
+          )}`
+        );
+        const data = await res.data;
+        const {
+          category,
+          heading,
+          imageUrl,
+          description,
+          subheading,
+          tags,
+          questions,
+          urls,
+          createdAt,
+          username,
+        } = data[0];
+        let time = new Date(createdAt);
+
+        const replaceContentUrl = (str) => {
+          let string = str;
+
+          urls.map((value) => {
+            string = string.replace(
+              `${value.keyword}`,
+              `<a href=${value.url}>${value.keyword}</a>`
+            );
+          });
+
+          return string;
+        };
+
+        let main = document.getElementById("main");
+        $("#heading").html(heading);
+        $("#time").html(`created at ${time} by ${username}`);
+        $("#header_img").attr("src", `${imageUrl}`);
+
+        let des = document.createElement("p");
+        let description_new = description.replace("\n", "<br/>");
+        des.innerHTML = description_new;
+        main.appendChild(des);
+
+        subheading.map((value) => {
+          let { title, content } = value;
+
+          let content_new = content.split("\n").join("<br/>");
+          let content_final = replaceContentUrl(content_new);
+          let arr = document.createElement("div");
+          let head = document.createElement("h3");
+          head.innerText = title;
+          arr.appendChild(head);
+          let cont = document.createElement("p");
+          cont.innerHTML = content_final;
+          arr.appendChild(cont);
+
+          main.appendChild(arr);
+        });
+
+        document.getElementById("fb-share-button").dataset["href"] =
+          window.location.href;
       };
     </script>
   </head>
 
-  <body>
-    <h1>about</h1>
-    <button onclick="handleurl()">Click me</button>
+  <body onload="handleUrl()">
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0"
+      nonce="b39mjxa9"
+    ></script>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <div id="main">
+            <h1 id="heading"></h1>
+            <h2 id="time" style="color: blue;"></h2>
+            <img src="" alt="" id="header_img" />
+            <a
+              href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+              data-show-count="false"
+              >Tweet</a
+            >
+            <script
+              async
+              src="https://platform.twitter.com/widgets.js"
+              charset="utf-8"
+            ></script>
+            <div
+              data-href="https://fast-sea-36089.herokuapp.com/"
+              data-layout="button"
+              data-size="large"
+            >
+              <a
+                target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wschools.com%2F&amp;src=sdkpreparse"
+                >Share</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12"></div>
+      </div>
+    </div>
   </body>
 </html>

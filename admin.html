@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Auth</title>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      redirect = () => {
+        axios
+          .post(
+            "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/login",
+            {
+              name: $("#name").val(),
+              password: $("#password").val(),
+            }
+          )
+          .then((res) => {
+            localStorage.setItem("token", res.data);
+            window.location.href = "http://127.0.0.1:5500/form.html";
+          })
+          .catch((err) => {
+            window.alert("Wrong Credentials");
+            console.log(err);
+          });
+      };
+    </script>
+    <style>
+      .dialog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .panel {
+        background-color: #ffff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        height: 300px;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+
+        flex-direction: column;
+      }
+      input {
+        width: 50%;
+        margin: 0 25%;
+        margin-bottom: 20px;
+        height: 20px;
+      }
+      label {
+        margin-left: 25%;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 30%;
+        margin: 0 35%;
+        height: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem("token") != null) {
+          window.location.href = "http://127.0.0.1:5500/form.html";
+        }
+      });
+    </script>
+    <div class="dialog">
+      <div class="panel">
+        <label>Username</label>
+        <input id="name" />
+        <label>Password</label>
+        <input id="password" type="password" />
+        <button onclick="redirect()">Login</button>
+      </div>
+    </div>
+  </body>
+</html>

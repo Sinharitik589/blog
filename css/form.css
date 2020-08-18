@@ -1,0 +1,58 @@
+main {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 60px 5%;
+  width: 100%;
+  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
+}
+.inputcontainer {
+  display: flex;
+}
+label {
+  text-align: center;
+}
+input,
+textarea {
+  width: 100%;
+  margin: 10px 0 20px;
+}
+
+button {
+  width: 100%;
+}
+.subheading {
+  margin: 25px 5%;
+  width: 90%;
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+}
+.row {
+  align-items: center;
+  margin-bottom: 25px;
+}
+.tags {
+  padding: 6px 10px;
+  border-radius: 19px;
+  background-color: #f6f6f6;
+}
+.tag-wrapper {
+  margin: 0px 4px 10px 0;
+}
+#tag-container {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.accordion {
+  background-color: #f6f6f6;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.accordion_heading,
+.accordion_content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
