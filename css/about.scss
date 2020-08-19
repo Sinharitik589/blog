@@ -1,9 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+body {
+  font-family: Graphik, Helvetica, Arial, sans-serif;
+}
+p {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+}
+
 img {
   width: 100%;
   height: 400px;
+  margin: 20px 0;
 }
 #heading {
   text-align: center;
-  font-weight: 600;
-  font-size: 40px;
+  font-weight: 550;
+  font-size: 35px;
+  letter-spacing: -0.005em;
+  margin: 40px 0;
+}
+.subheading {
+  padding: 10px 20px;
+
+  h3 {
+    line-height: 1.2;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+}
+.lo {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quest-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#time {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    color: grey;
+    font-size: small;
+    margin-bottom: 10px;
+    svg {
+      margin-right: 5px;
+    }
+  }
+}
+
+.icon-box {
+  width: 45px;
+  height: 45px;
+  border-radius: 30px;
+  background-color: #ffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  color: blue;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 30px;
+}
+
+@media screen and (max-width: 900px) {
+  img {
+    width: 100%;
+    height: 200px;
+  }
+  .subheading {
+    padding: 20px 0;
+  }
 }
