@@ -5,6 +5,9 @@
 body {
   font-family: "Merriweather", serif;
 }
+#main {
+  margin-top: 150px;
+}
 p {
   font-family: "Merriweather", serif;
   font-size: 20px;
@@ -16,10 +19,12 @@ p {
 
 img {
   width: 100%;
-  height: 400px;
+  height: 500px;
   margin: 20px 0;
+  z-index: -1;
 }
 #heading {
+  z-index: -1;
   text-align: center;
   font-weight: 550;
   font-size: 35px;
@@ -29,6 +34,7 @@ img {
 }
 .subheading {
   padding: 15px 20px;
+  z-index: -1;
 
   h3 {
     line-height: 1.2;
@@ -79,8 +85,9 @@ img {
   box-shadow: none;
   border: 1px solid #dfe1e5;
   border-radius: 8px;
-  margin-top: 100px;
+
   border-bottom: none;
+  margin: 60px 0 0;
 
   position: -webkit-sticky;
 }
@@ -88,7 +95,7 @@ img {
   position: -webkit-sticky;
   position: sticky;
   top: 100px;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 #time {
   display: flex;
@@ -111,7 +118,7 @@ img {
   width: 45px;
   height: 45px;
   border-radius: 30px;
-  background-color: #ffff;
+  background-color: #1da1f3;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   justify-content: center;
   display: flex;
@@ -129,19 +136,64 @@ img {
 #ad {
   width: 100%;
   height: 700px;
-  background-color: grey;
+  margin-bottom: 60px;
 }
 
 footer {
   height: 100vh;
   width: 100vw;
-  background-color: grey;
 }
 
+.chip-wrapper {
+  margin-right: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  white-space: nowrap;
+
+  padding: 0 25px;
+  height: 30px;
+
+  color: white;
+  background-color: #314b7f;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 3px 5px;
+}
+#tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 20px;
+}
+.application-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  margin-bottom: 30px;
+  z-index: 1030;
+}
+.application-navbar-content {
+  padding: 0 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 @media screen and (max-width: 900px) {
   img {
     width: 100%;
-    height: 200px;
+    height: 350px;
   }
   .subheading {
     padding: 20px 0;

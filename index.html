@@ -8,6 +8,7 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./css/index.css" />
 
     <!-- JS, Popper.js, and jQuery -->
     <script
@@ -26,91 +27,33 @@
       crossorigin="anonymous"
     ></script>
 
-    <style>
-      #main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
-        margin-top: 50px;
-        background-color: #f6f6f6;
-        padding: 20px;
-      }
-      h1,
-      h3,
-      p {
-        text-align: center;
-      }
-      p {
-        font-size: 16px;
-      }
-      a {
-        text-decoration: none;
-        color: gray;
-      }
-      a:hover {
-        text-decoration: none;
-        color: gray;
-      }
-      .component {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        background-color: #ffff;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      }
-      mark {
-        background-color: grey;
-        color: #ffff;
-      }
-      img {
-        width: 100%;
-        height: 200px;
-      }
-    </style>
+    <style></style>
     <meta
       http-equiv="Content-Security-Policy"
       content="upgrade-insecure-requests"
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript">
-      const replace = (str) => {
-        let array = str;
-        for (i = 0; i < str.length; i++) {
-          array = array.replace(" ", "_");
-        }
-        return array;
-      };
-      const CallApi = async () => {
-        const res = await axios.get(
-          "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
-        );
-        const data = await res.data;
-        let component = document.getElementById("main");
-
-        data.map((value, i) => {
-          let element = `<a class="col-md-4 col-sm-12" href=about?${replace(
-            value.heading
-          )}><div class="component " id=${i} onclick="handleClick(
-            this.id
-          )" >
-          <img src="${value.imageUrl}"/>
-          <h1>${value.heading}</h1>
-          
-          <p>${value.description}"</p>
-          </div></a>`;
-          component.insertAdjacentHTML("beforeend", element);
-        });
-      };
-
-      const handleClick = (e) => {
-        console.log(document.getElementById(e).dataset);
-      };
-    </script>
+    <script src="./javascript/index.js"></script>
   </head>
   <body onload="CallApi()">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="">Blog</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto"></ul>
+      </div>
+    </nav>
+
     <div class="container">
       <div id="main" class="row"></div>
     </div>

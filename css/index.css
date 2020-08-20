@@ -1,4 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap");
+#main {
+  margin-top: 150px;
+}
+
+.heading {
+  font-size: 22px;
+  text-align: center;
+  width: 100%;
+  font-family: "EB Garamond", serif;
+  color: #808080;
+  line-height: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  background-color: #ffff;
+  margin-bottom: 20px;
+  border: 1px solid #f1f3f5;
+}
+
+mark {
+  background-color: grey;
+  color: #ffff;
+}
+
 img {
-  height: 100vh;
+  width: 100%;
+  height: 250px;
+}
+
+.component-description {
+  padding: 20px 20px;
+  height: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.auth-des {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.auth-des span {
+  color: grey;
+}
+
+.auth-des span svg {
+  color: black;
+  margin-right: 2px;
+}
+
+.component:hover {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=index.css.map */

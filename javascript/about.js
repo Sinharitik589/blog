@@ -50,6 +50,7 @@ const handleUrl = async () => {
     createdAt,
     username,
   } = data[0];
+  console.log(tags);
   let times = new Date(createdAt);
   let day = week_days[times.getDay()];
   let date = times.getDate();
@@ -114,6 +115,13 @@ const handleUrl = async () => {
   $("#container,#footer").show();
 
   // these statements will creates the side content(question)
+
+  let tag = document.getElementById("tag");
+
+  tags.map((value) => {
+    let arr = `<div class="chip-wrapper"><div class="chip">${value}</div></div>`;
+    tag.insertAdjacentHTML("beforeend", arr);
+  });
 
   let qcomponent = document.getElementById("quest");
   const openAnswer = (id) => {};
