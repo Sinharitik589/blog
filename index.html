@@ -57,7 +57,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 20px;
+        width: 100%;
         background-color: #ffff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       }
@@ -91,9 +91,9 @@
         let component = document.getElementById("main");
 
         data.map((value, i) => {
-          let element = `<a href=about?${replace(
+          let element = `<a class="col-md-4 col-sm-12" href=about?${replace(
             value.heading
-          )}><div class="component" id=${i} onclick="handleClick(
+          )}><div class="component " id=${i} onclick="handleClick(
             this.id
           )" >
           <img src="${value.imageUrl}"/>
@@ -111,7 +111,8 @@
     </script>
   </head>
   <body onload="CallApi()">
-    <a href="about?techblogs">About</a>
-    <div id="main" class="container"></div>
+    <div class="container">
+      <div id="main" class="row"></div>
+    </div>
   </body>
 </html>
