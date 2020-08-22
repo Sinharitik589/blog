@@ -92,9 +92,9 @@ const handleUrl = async () => {
   des.innerHTML = description_new;
   main.appendChild(des);
 
-  subheading.map((value) => {
+  subheading.map((value, index) => {
     let { title, content } = value;
-
+    let ad = "<hr/><div class='small-ad'>Space for ad</div><hr/>";
     let content_new = content.split("\n").join("<br/>");
     let content_final = replaceContentUrl(content_new);
     let arr = document.createElement("div");
@@ -107,12 +107,19 @@ const handleUrl = async () => {
     arr.appendChild(cont);
 
     main.appendChild(arr);
+    if (
+      index == "0" ||
+      index == subheading.length - 1 ||
+      index == subheading.length / 2
+    ) {
+      main.insertAdjacentHTML("beforeend", ad);
+    }
   });
 
   document.getElementById("fb-share-button").dataset["href"] =
     window.location.href;
   $("#loader").hide();
-  $("#container,#footer").show();
+  $("#container,#footer,#banner_ad").show();
 
   // these statements will creates the side content(question)
 

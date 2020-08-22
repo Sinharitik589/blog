@@ -239,7 +239,7 @@ const submitInfo = async () => {
   console.log(imageUrl, "image");
   let category = $("#categories :selected").val();
   const res = await axios.post(
-    "http://localhost:9000/.netlify/functions/api/input",
+    "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/input",
     {
       category,
       heading,
