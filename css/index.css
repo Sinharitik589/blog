@@ -5,6 +5,10 @@ img {
   padding: 0;
 }
 
+.carousel-item img {
+  height: 70vh;
+}
+
 #main {
   margin-top: 20px;
 }
@@ -28,11 +32,6 @@ p {
   width: 100%;
   font-family: "EB Garamond", serif;
   line-height: 1;
-}
-
-.slide-control {
-  margin-top: 100px;
-  margin-bottom: 50px;
 }
 
 .lo {
@@ -146,6 +145,9 @@ img {
 }
 
 @media screen and (max-width: 900px) {
+  .carousel-item img {
+    height: 50vh;
+  }
   .blog-container {
     padding: 10px 1%;
     display: -webkit-box;

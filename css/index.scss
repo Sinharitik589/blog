@@ -5,6 +5,11 @@
 img {
   padding: 0;
 }
+.carousel-item {
+  img {
+    height: 70vh;
+  }
+}
 #main {
   margin-top: 20px;
 }
@@ -26,10 +31,7 @@ p {
 
   line-height: 1;
 }
-.slide-control {
-  margin-top: 100px;
-  margin-bottom: 50px;
-}
+
 .lo {
   position: absolute;
   width: 100vw;
@@ -107,6 +109,11 @@ img {
 }
 
 @media screen and (max-width: 900px) {
+  .carousel-item {
+    img {
+      height: 50vh;
+    }
+  }
   .blog-container {
     padding: 10px 1%;
     display: flex;
