@@ -222,16 +222,16 @@ const handleUrlInput = (id) => {
 const urlInput = () => {
   if (event.keyCode == 13) {
     $("#url_input,#url_input_value,#url_input_button").toggle();
-    let element = document.getElementById("url_table");
+
     let object = event.target.value.split(",");
     object.map((value) => {
       let arr = value.split("-");
-      let component = `<tr><th>${arr[0]}</th><th>${arr[1]}</th></tr>`;
+
       urls.push({
         keyword: arr[0],
         url: arr[1],
       });
-      element.insertAdjacentHTML("beforeend", component);
+      console.log(urls);
     });
   }
 };

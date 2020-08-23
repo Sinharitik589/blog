@@ -40,5 +40,5 @@ const CallApi = async () => {
     component.insertAdjacentHTML("beforeend", element);
   });
   $("#loader").hide();
-  $("#container").show();
+  $("#container,#footer").show();
 };

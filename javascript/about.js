@@ -61,8 +61,9 @@ const handleUrl = async () => {
 
   const replaceContentUrl = (str) => {
     let string = str;
-
+    console.log("called", urls);
     urls.map((value) => {
+      console.log(value, "value");
       string = string.replace(
         `${value.keyword}`,
         `<a href=${value.url}>${value.keyword}</a>`
@@ -102,6 +103,12 @@ const handleUrl = async () => {
     let head = document.createElement("h3");
     head.innerText = title;
     arr.appendChild(head);
+    let img = document.createElement("div");
+    img.className = "subheading-image";
+    if (value.url) {
+      img.insertAdjacentHTML("beforeend", `<img src=${value.url}></img>`);
+    }
+    arr.appendChild(img);
     let cont = document.createElement("p");
     cont.innerHTML = content_final;
     arr.appendChild(cont);

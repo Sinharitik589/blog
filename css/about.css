@@ -4,10 +4,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap");
 body {
   font-family: "Merriweather", serif;
+  overflow-x: hidden;
 }
 
 #main {
-  margin-top: 150px;
+  margin-top: 50px;
+}
+
+.subheading-image {
+  margin: 20px 0;
+}
+
+.subheading-image img {
+  height: 300px;
+  width: 60%;
+  margin: 0 20%;
 }
 
 p {
@@ -65,8 +76,7 @@ img {
 }
 
 mark {
-  background-color: grey;
-  color: #ffff;
+  background-color: #16b3fc;
 }
 
 .quest-container {
@@ -202,9 +212,35 @@ mark {
 }
 
 footer {
-  height: 100vh;
+  padding: 60px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100vw;
   background-color: #343a40;
+  color: white;
+}
+
+footer span {
+  font-size: small;
+  font-family: "Roboto", sans-serif;
+  color: gray;
+}
+
+footer span span {
+  text-decoration: underline;
+  color: blue;
+  font-size: large;
 }
 
 .chip-wrapper {
@@ -284,6 +320,14 @@ footer {
   }
   .subheading {
     padding: 20px 0;
+  }
+  .subheading-image {
+    margin: 15px 0;
+  }
+  .subheading-image img {
+    height: 200px;
+    width: 60%;
+    margin: 0 20%;
   }
 }
 /*# sourceMappingURL=about.css.map */
