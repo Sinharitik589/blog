@@ -1,0 +1,128 @@
+.side_nav {
+  width: 100%;
+  background-color: #0e0c28;
+  padding: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  color: #7a80b4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.side_nav span {
+  padding: 10px;
+}
+
+.side_nav span:hover {
+  background-color: #242849;
+  color: white;
+}
+
+nav {
+  background-color: grey;
+  height: 70px;
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  padding: 50px 3%;
+}
+
+.application-tags {
+  padding: 6px 10px;
+  border-radius: 19px;
+  background-color: #f6f6f6;
+}
+
+.application-tag-container {
+  margin: 0px 4px 10px 0;
+}
+
+.skills {
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.subheading-tab-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 5px;
+}
+
+.subheading-tab-container div button {
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 900px) {
+  .side_nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 50px;
+    padding: 0;
+    z-index: 1030;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .side_nav span {
+    padding: 0;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .main-content {
+    padding: 50px 5px;
+  }
+  .label_heading {
+    text-align: center;
+  }
+  .label-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+/*# sourceMappingURL=featured.css.map */

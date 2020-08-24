@@ -3,42 +3,10 @@ var tags = [];
 var questions = [];
 var subheading = [];
 var urls = [];
-var sub_count = 0;
-var quest_count = 0;
-const handleHeadingInput = (event) => {
-  if (event.keyCode == 13) {
-    heading = event.target.value;
-    $("#heading_container").html(event.target.value);
-    $("#heading_input,#heading_container,#heading_button").toggle();
-  }
-};
-const handleHeading = (id) => {
-  $("#heading_input,#heading_container,#heading_button").toggle();
-};
-const handleImageInput = (event) => {
-  if (event.keyCode == 13) {
-    imageUrl = event.target.value;
-    console.log(event.target.value);
-    $("#url_container").html(event.target.value);
-    $("#url_input,#url_container,#url_button").toggle();
-  }
-};
-const handleImage = (id) => {
-  $("#url_input,#url_container,#url_button").toggle();
-};
+/* var sub_count = 0;
+var quest_count = 0; */
 
-const handleDescription = (id) => {
-  if ($(`#${id}`).html() == "Save") {
-    $(`#${id}`).html("Edit");
-    $("#description_value").html($("#description_input").val());
-    $("#description_input,#description_value").toggle();
-    description = $("#description_input").val();
-  } else {
-    $(`#${id}`).html("Save");
-    $("#description_input,#description_value").toggle();
-  }
-};
-const handleSubheading = (id) => {
+/* const handleSubheading = (id) => {
   $("#subheading_input").show();
   console.log(heading, description, tags, questions, subheading);
 };
@@ -235,10 +203,125 @@ const urlInput = () => {
     });
   }
 };
+ */
+const subheadingSave = () => {
+  let title = $("#subheading_title").val();
+  let url = $("#subheading_url").val();
+  let content = $("#subheading_description").val();
+  let object = { title, url, content };
+  subheading.push(object);
+
+  let component = `<div class="subheading-tab-container">
+                  <h5>${title}</h3>
+                    <div style="
+                                      display: flex;
+                                      flex-direction: row-reverse;
+                                      margin: px 0;
+                                    ">
+                      <button type="button" class="btn btn-primary btn-sm">delete</button>
+                      <button type="button" class="btn btn-secondary btn-sm">edit</button>
+                
+                    </div>
+                </div>`;
+
+  let element = document.getElementById("subheading_tabs");
+  element.insertAdjacentHTML("beforeend", component);
+  $("#edit_panel").hide();
+};
+const subheadingCancel = () => {
+  $("#edit_panel").hide();
+};
+const questionSave = () => {
+  let question = $("#quest").val();
+  let answer = $("#ans").val();
+
+  let object = { question, answer };
+  questions.push(object);
+  let component = `<div class="subheading-tab-container">
+                  <h5>${question}</h3>
+                    <div style="
+                                      display: flex;
+                                      flex-direction: row-reverse;
+                                      margin: px 0;
+                                    ">
+                      <button type="button" class="btn btn-primary btn-sm">delete</button>
+                      <button type="button" class="btn btn-secondary btn-sm">edit</button>
+                
+                    </div>
+                </div>`;
+
+  let element = document.getElementById("subheading_quest");
+  element.insertAdjacentHTML("beforeend", component);
+
+  $("#quest_edit_panel").hide();
+};
+const questionCancel = () => {
+  $("#quest_edit_panel").hide();
+};
+
+const tagInput = (event) => {
+  if (event.keyCode == 13) {
+    let array = event.target.value.split(",");
+    array.map((val) => {
+      let element = `  <div class="application-tag-container">
+          <div class="application-tags">${val}</div>
+        </div>`;
+
+      let component = document.getElementById("skills_set");
+      component.insertAdjacentHTML("beforeend", element);
+    });
+    tags.push(array);
+    console.log(array);
+    $("#add_skill").hide();
+  }
+};
+
+const urlInputHandle = (event) => {
+  if (event.keyCode == 13) {
+  }
+  if (event.keyCode == 13) {
+    let object = event.target.value.split(",");
+    object.map((value) => {
+      let arr = value.split("-");
+      let element = `  <a href="${arr[1]}"><div  class="application-tag-container ">
+          <div class="application-tags" style="background-color: #dfe9fb;">${arr[0]}</div>
+        </div></a>`;
+
+      let component = document.getElementById("url_set");
+      component.insertAdjacentHTML("beforeend", element);
+
+      urls.push({
+        keyword: arr[0],
+        url: arr[1],
+      });
+      console.log(urls);
+    });
+    $("#add_url").hide();
+  }
+};
+
 const submitInfo = async () => {
-  console.log(imageUrl, "image");
   let category = $("#categories :selected").val();
-  const res = await axios.post(
+  description = $("#description_input").val();
+  heading = $("#heading_input").val();
+  imageUrl = $("#url_input").val();
+  console.log(
+    description,
+    "next",
+    heading,
+    "next",
+    imageUrl,
+    "next",
+    urls,
+    "next",
+    tags,
+    "next",
+    subheading,
+    "next",
+    questions
+  );
+
+  /* const res = await axios.post(
     "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/input",
     {
       category,
@@ -257,5 +340,5 @@ const submitInfo = async () => {
 
   if (res) {
     window.alert("done");
-  }
+  } */
 };
