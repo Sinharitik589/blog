@@ -1,3 +1,20 @@
+.featured-tab {
+  border: 1px solid grey;
+  padding: 10px 5px;
+}
+
+#featured-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin: 0 25%;
+}
+
 .side_nav {
   width: 100%;
   background-color: #0e0c28;
@@ -23,6 +40,10 @@
 .side_nav span:hover {
   background-color: #242849;
   color: white;
+}
+
+.modal {
+  overflow-y: auto;
 }
 
 nav {
@@ -78,6 +99,65 @@ nav {
   margin-left: 5px;
 }
 
+.edit-blog-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  height: 300px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.edit-blog-tab img {
+  height: 200px;
+  width: 100%;
+}
+
+.edit-blog-tab div {
+  height: 100px;
+  width: 100%;
+  padding: 10px 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.edit-blog-tab div div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.edit-blog-tab div div span {
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 900px) {
   .side_nav {
     display: -webkit-box;
@@ -123,6 +203,20 @@ nav {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+  .modal {
+    width: 100vw;
+  }
+  #featured-tab {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 90%;
+    margin: 0 5%;
   }
 }
 /*# sourceMappingURL=featured.css.map */

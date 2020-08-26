@@ -1,3 +1,6 @@
+var featured = [];
+var featured_flag = 0;
+
 const replace = (str) => {
   let array = str;
   for (i = 0; i < str.length; i++) {
@@ -6,6 +9,14 @@ const replace = (str) => {
   return array;
 };
 const CallApi = async () => {
+  axios
+    .get(
+      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured"
+    )
+    .then((res) => {
+      featured = res.data.featured;
+      console.log(featured, "featured");
+    });
   const res = await axios.get(
     "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
   );
@@ -37,7 +48,85 @@ const CallApi = async () => {
          }"/></div>
          
           </div></a>`;
-    component.insertAdjacentHTML("beforeend", element);
+    component.insertAdjacentHTML("afterbegin", element);
+
+    let flag = featured.findIndex((val) => {
+      return val == value.heading;
+    });
+
+    if (flag >= 0) {
+      if (featured_flag == 0) {
+        $("#carousel_inner").append(`<div class="carousel-item active">
+             <a href=./about.html?${replace(value.heading)}> <div
+                class="d-block w-100 description-container"
+                style="
+                  background-image: url(${value.imageUrl});
+
+                  background-size: cover;
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+                    color: white;
+                    background-color: #0009;
+                  "
+                >
+                  <div>
+                    <div class="heading">
+                      ${value.heading}
+                    </div>
+                    <p class="carousel-des">
+                       ${value.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>`);
+        featured_flag = 1;
+      } else {
+        $("#carousel_inner").append(`<div class="carousel-item ">
+             <a href=./about.html?${replace(value.heading)}> <div
+                class="d-block w-100 description-container"
+                style="
+                  background-image: url(${value.imageUrl});
+
+                  background-size: cover;
+                "
+              >
+                <div
+                  style="
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 100%;
+                    color: white;
+                    background-color: #0009;
+                  "
+                >
+                  <div>
+                    <div class="heading">
+                      ${value.heading}
+                    </div>
+                    <p class="carousel-des">
+                       ${value.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div> </a>`);
+      }
+    }
   });
   $("#loader").hide();
   $("#container,#footer").show();

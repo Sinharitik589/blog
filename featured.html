@@ -31,28 +31,7 @@
     <link rel="stylesheet" href="./css/form.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script>
-      const show = (event) => {
-        for (i = 0; i < 4; i++) {
-          if (`#home${i}` == event) $(`#home${i}`).show();
-          else {
-            $(`#home${i}`).hide();
-          }
-        }
-      };
-      const showBut = () => {
-        $("#add_skill").show();
-      };
-      const showUrl = () => {
-        $("#add_url").show();
-      };
-      const editPanel = () => {
-        $("#edit_panel").show();
-      };
-      const questeditPanel = () => {
-        $("#quest_edit_panel").show();
-      };
-    </script>
+    <script></script>
   </head>
   <body>
     <script>
@@ -65,22 +44,35 @@
     <nav></nav>
     <div class="row">
       <div class="col-md-2 col-sm-12 side_nav">
-        <span data-dom="#home0" onclick="show(this.getAttribute('data-dom'))">
-          Home
+        <span
+          id="button_home0"
+          data-dom="#home0"
+          style="background-color: #242849; color: white"
+          onclick="show(this.getAttribute('data-dom'))"
+        >
+          Blogs
         </span>
-        <span data-dom="#home1" onclick="show(this.getAttribute('data-dom'))">
-          Home1
+        <span
+          id="button_home1"
+          data-dom="#home1"
+          onclick="show(this.getAttribute('data-dom'))"
+        >
+          Add new
         </span>
-        <span data-dom="#home2" onclick="show(this.getAttribute('data-dom'))">
-          Home2
-        </span>
-        <span data-dom="#home3" onclick="show(this.getAttribute('data-dom'))">
-          Home3
+        <span
+          id="button_home2"
+          data-dom="#home2"
+          onclick="show(this.getAttribute('data-dom'))"
+        >
+          Featured
         </span>
       </div>
-      <div class="col-md-10 col-sm-12 main-content">
-        <div id="home0"></div>
-        <div style="display: none;" id="home1">
+
+      <div class="col-md-10 col-sm-12 container" style="margin-top: 20px">
+        <div id="home0">
+          <div class="row" id="blog_tabs"></div>
+        </div>
+        <div style="display: none" id="home1">
           <div class="form-group">
             <label for="heading_input">Heading</label>
             <input
@@ -101,7 +93,7 @@
           </div>
 
           <div class="form-group">
-            <label for="description_input">Example textarea</label>
+            <label for="description_input">Description</label>
             <textarea
               id="description_input"
               class="form-control"
@@ -113,7 +105,7 @@
             <div class="row">
               <div class="col-md-1 col-sm-12">
                 <h3
-                  style="color: #464646; font-weight: bold; text-align: center;"
+                  style="color: #464646; font-weight: bold; text-align: center"
                   }
                 >
                   Tags
@@ -123,7 +115,7 @@
                 <div class="skills" id="skills_set">
                   <input
                     class="form-control"
-                    style="display: none;"
+                    style="display: none"
                     onkeyup="tagInput(event)"
                     id="add_skill"
                   />
@@ -151,7 +143,7 @@
             <div class="row">
               <div class="col-md-3 col-sm-12">
                 <h3
-                  style="color: #464646; font-weight: bold;"
+                  style="color: #464646; font-weight: bold"
                   class="label_heading"
                 >
                   Subheading
@@ -171,18 +163,12 @@
                   <div class="row">
                     <div class="col-md-6 col-sm-12">
                       <label class="application-label">Title</label>
-                      <input
-                        class="application-input application-input-container"
-                        id="subheading_title"
-                      />
+                      <input class="form-control" id="subheading_title" />
                     </div>
 
                     <div class="col-md-6 col-sm-12">
                       <label class="application-label">Url</label>
-                      <input
-                        class="application-input application-input-container"
-                        id="subheading_url"
-                      />
+                      <input class="form-control" id="subheading_url" />
                     </div>
                   </div>
                   <div class="row">
@@ -204,7 +190,7 @@
                     "
                   >
                     <button
-                      style="background-color: #365679; color: white;"
+                      style="background-color: #365679; color: white"
                       onclick="subheadingSave()"
                       class="panel-button"
                     >
@@ -223,7 +209,7 @@
             <div class="row">
               <div class="col-md-3 col-sm-12">
                 <h3
-                  style="color: #464646; font-weight: bold;"
+                  style="color: #464646; font-weight: bold"
                   class="label_heading"
                 >
                   Question
@@ -243,10 +229,7 @@
                   <div class="row">
                     <div class="col-md-12 col-sm-12">
                       <label class="application-label">Question</label>
-                      <input
-                        class="application-input application-input-container"
-                        id="quest"
-                      />
+                      <input class="form-control" id="quest" />
                     </div>
                   </div>
                   <div class="row">
@@ -268,7 +251,7 @@
                     "
                   >
                     <button
-                      style="background-color: #365679; color: white;"
+                      style="background-color: #365679; color: white"
                       onclick="questionSave()"
                       class="panel-button"
                     >
@@ -287,11 +270,7 @@
             <div class="row">
               <div class="col-md-1 col-sm-12">
                 <h3
-                  style="
-                    columns: #464646;
-                    font-weight: bold;
-                    text-align: center;
-                  "
+                  style="color: #464646; font-weight: bold; text-align: center"
                   }
                 >
                   Urls
@@ -301,7 +280,7 @@
                 <div class="skills" id="url_set">
                   <input
                     class="form-control"
-                    style="display: none;"
+                    style="display: none"
                     id="add_url"
                     onkeyup="urlInputHandle(event)"
                   />
@@ -343,8 +322,494 @@
             </div>
           </div>
         </div>
-        <div style="display: none;" id="home2"><h1>Home2</h1></div>
-        <div style="display: none;" id="home3"><h1>Home3</h1></div>
+        <div style="display: none" id="home2">
+          <div id="featured-tab"></div>
+          <span style="display: flex; justify-content: center; margin: 20px 0">
+            <button
+              type="button "
+              onclick="featureSubmit()"
+              class="btn btn-primary btn-lg"
+            >
+              Save Changes
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="exampleModalLong"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <div class="form-group">
+                  <label for="modal_heading_input">Heading</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="modal_heading_input"
+                    placeholder="name@example.com"
+                    disabled
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="modal_url_input">Image url</label>
+                  <input
+                    type="url"
+                    class="form-control"
+                    id="modal_url_input"
+                    placeholder="name@example.com"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="modal_description_input">Description</label>
+                  <textarea
+                    id="modal_description_input"
+                    class="form-control"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-1 col-sm-12">
+                      <h3
+                        style="
+                          color: #464646;
+                          font-weight: bold;
+                          text-align: center;
+                        "
+                        }
+                      >
+                        Tags
+                      </h3>
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                      <div class="skills" id="modal_skills_set">
+                        <input
+                          class="form-control"
+                          style="display: none"
+                          onkeyup="modaltagInput(event)"
+                          id="modal_add_skill"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-2 col-sm-12"
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                      "
+                    >
+                      <button
+                        onclick="modalshowBut()"
+                        class="application-button-container"
+                      >
+                        + Add
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                      <h3
+                        style="color: #464646; font-weight: bold"
+                        class="label_heading"
+                      >
+                        Subheading
+                      </h3>
+                    </div>
+                    <div
+                      class="col-md-7 col-sm-12"
+                      id="modal_subheading_tabs"
+                    ></div>
+                    <div class="col-md-2 col-sm-12 label-button">
+                      <button
+                        onclick="modaleditPanel()"
+                        class="application-button-container"
+                      >
+                        + Add
+                      </button>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div class="edit-panel" id="modal_edit_panel">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-12">
+                            <label class="application-label">Title</label>
+                            <input
+                              class="form-control"
+                              id="modal_subheading_title"
+                            />
+                          </div>
+
+                          <div class="col-md-6 col-sm-12">
+                            <label class="application-label">Url</label>
+                            <input
+                              class="form-control"
+                              id="modal_subheading_url"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <label class="application-label">Description</label>
+                            <textarea
+                              id="modal_subheading_description"
+                              class="form-control"
+                              rows="6"
+                            ></textarea>
+                          </div>
+                        </div>
+
+                        <div
+                          style="
+                            display: flex;
+                            flex-direction: row-reverse;
+                            margin: 15px 0;
+                          "
+                        >
+                          <button
+                            style="background-color: #365679; color: white"
+                            onclick="modalsubheadingSave()"
+                            class="panel-button"
+                          >
+                            Save
+                          </button>
+                          <button
+                            class="panel-button"
+                            onclick="modalsubheadingCancel()"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                      <h3
+                        style="color: #464646; font-weight: bold"
+                        class="label_heading"
+                      >
+                        Question
+                      </h3>
+                    </div>
+                    <div
+                      class="col-md-7 col-sm-12"
+                      id="modal_subheading_quest"
+                    ></div>
+                    <div class="col-md-2 col-sm-12 label-button">
+                      <button
+                        onclick="modalquesteditPanel()"
+                        class="application-button-container"
+                      >
+                        + Add
+                      </button>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                      <div class="edit-panel" id="modal_quest_edit_panel">
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <label class="application-label">Question</label>
+                            <input class="form-control" id="modal_quest" />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12">
+                            <label class="application-label">Answer</label>
+                            <textarea
+                              id="modal_ans"
+                              class="form-control"
+                              rows="3"
+                            ></textarea>
+                          </div>
+                        </div>
+
+                        <div
+                          style="
+                            display: flex;
+                            flex-direction: row-reverse;
+                            margin: 15px 0;
+                          "
+                        >
+                          <button
+                            style="background-color: #365679; color: white"
+                            onclick="modalquestionSave()"
+                            class="panel-button"
+                          >
+                            Save
+                          </button>
+                          <button
+                            class="panel-button"
+                            onclick="modalquestionCancel()"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-1 col-sm-12">
+                      <h3
+                        style="
+                          color: #464646;
+                          font-weight: bold;
+                          text-align: center;
+                        "
+                        }
+                      >
+                        Urls
+                      </h3>
+                    </div>
+                    <div class="col-md-9 col-sm-12">
+                      <div class="skills" id="modal_url_set"></div>
+                    </div>
+                    <div
+                      class="col-md-2 col-sm-12"
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                      "
+                    >
+                      <button
+                        onclick="modalshowUrl()"
+                        class="application-button-container"
+                      >
+                        + Add
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button onclick="putBlog()" type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="subModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <label class="application-label">Title</label>
+                  <input class="form-control" id="modals_title" />
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                  <label class="application-label">Url</label>
+                  <input class="form-control" id="modals_url" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <label class="application-label">Description</label>
+                  <textarea
+                    id="modals_description"
+                    class="form-control"
+                    rows="6"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                onclick="subModalSave()"
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="deleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Are you sure?</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span> Deleting Blog:-</span>
+              <h3 id="deleteblogname"></h3>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                onclick="deleteBlogConfirm()"
+                class="btn btn-primary"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="questModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Modal title
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <label class="application-label">Question</label>
+                  <input class="form-control" id="modals_quest" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <label class="application-label">Answer</label>
+                  <textarea
+                    id="modals_ans"
+                    class="form-control"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                onclick="questModalSave()"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
