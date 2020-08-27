@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -46,7 +46,7 @@
       <div class="col-md-2 col-sm-12 side_nav">
         <span
           id="button_home0"
-          data-dom="#home0"
+          data-dom="0"
           style="background-color: #242849; color: white"
           onclick="show(this.getAttribute('data-dom'))"
         >
@@ -54,14 +54,14 @@
         </span>
         <span
           id="button_home1"
-          data-dom="#home1"
+          data-dom="1"
           onclick="show(this.getAttribute('data-dom'))"
         >
           Add new
         </span>
         <span
           id="button_home2"
-          data-dom="#home2"
+          data-dom="2"
           onclick="show(this.getAttribute('data-dom'))"
         >
           Featured
@@ -405,14 +405,7 @@
                       </h3>
                     </div>
                     <div class="col-md-9 col-sm-12">
-                      <div class="skills" id="modal_skills_set">
-                        <input
-                          class="form-control"
-                          style="display: none"
-                          onkeyup="modaltagInput(event)"
-                          id="modal_add_skill"
-                        />
-                      </div>
+                      <div class="skills" id="modal_skills_set"></div>
                     </div>
                     <div
                       class="col-md-2 col-sm-12"
@@ -619,6 +612,7 @@
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
+                onclick="refreshVars()"
               >
                 Close
               </button>
@@ -742,6 +736,54 @@
                 class="btn btn-primary"
               >
                 Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="confirmmodal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Do you want to navigate ?</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Kindly submit the changes before leaving or your data will be lost
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Submit first
+              </button>
+              <button
+                type="button"
+                data-dismiss="modal"
+                onclick="clearThings()"
+                class="btn btn-primary"
+              >
+                Navigate
               </button>
             </div>
           </div>

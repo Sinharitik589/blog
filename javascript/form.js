@@ -1,7 +1,10 @@
 var heading, description, imageUrl, blog_name, index_value;
 var tags = [];
+
 var questions = [];
+
 var subheading = [];
+
 var urls = [];
 var tab_count = 0;
 var url_count = 0;
@@ -12,23 +15,88 @@ var quest_count = 0;
 var modal_quest_count = 0;
 var modal_sub_count = 0;
 var questModalno, subModalno;
-
+var tab_active = 0;
+var prompted;
+var change_attribute;
 var featured = [];
 
-const show = (event) => {
-  for (i = 0; i < 4; i++) {
-    if (`#home${i}` == event) {
+refreshVars = () => {
+  questions = [];
+  subheading = [];
+  urls = [];
+  tags = [];
+};
+
+const cleanForm = () => {
+  $("#skills_set").empty();
+  $("#skills_set").append(`<input
+                    class="form-control"
+                    style="display: none;"
+                    onkeyup="tagInput(event)"
+                    id="add_skill"
+                  />`);
+  $("#subheading_tabs").empty();
+
+  $("#subheading_quest").empty();
+
+  $("#url_set").empty();
+  $("#url_set").append(`<input
+                    class="form-control"
+                    style="display: none;"
+                    id="add_url"
+                    onkeyup="urlInputHandle(event)"
+                  />`);
+};
+const clearThings = () => {
+  refreshVars();
+  cleanForm();
+  for (i = 0; i < 3; i++) {
+    if (i == prompted) {
       $(`#home${i}`).show();
       $(`#button_home${i}`).css({
         "background-color": "#242849",
         color: "white",
       });
+      tab_active = i;
     } else {
       $(`#home${i}`).hide();
       $(`#button_home${i}`).css({
         "background-color": "#0e0c28",
         color: "#7a80b4",
       });
+    }
+  }
+};
+
+const show = (event) => {
+  prompted = event;
+  for (i = 0; i < 3; i++) {
+    if (
+      event == 0 &&
+      tab_active == 1 &&
+      (questions.length > 0 ||
+        subheading.length > 0 ||
+        tags.length > 0 ||
+        urls.length > 0)
+    ) {
+      $("#confirmmodal").modal("show");
+    } else if (event == 1 && tab_active == 0 && questions.length > 0) {
+      refreshVars();
+    } else {
+      if (i == event) {
+        $(`#home${i}`).show();
+        $(`#button_home${i}`).css({
+          "background-color": "#242849",
+          color: "white",
+        });
+        tab_active = i;
+      } else {
+        $(`#home${i}`).hide();
+        $(`#button_home${i}`).css({
+          "background-color": "#0e0c28",
+          color: "#7a80b4",
+        });
+      }
     }
   }
 };
@@ -98,38 +166,101 @@ const modalquesteditPanel = () => {
 };
 
 const replace = (str) => {
+  console.log(replace);
   let array = str;
   for (i = 0; i < str.length; i++) {
     array = array.replace(" ", "_");
   }
   return array;
 };
-const questModal = (value) => {
-  console.log(value);
-  console.log(questions);
-  questModalno = value;
-  $("#modals_quest").val(questions[value].question);
-  $("#modals_ans").val(questions[value].answer);
+const revreplace = (str) => {
+  console.log(str);
+  let array = str;
+  for (i = 0; i < str.length; i++) {
+    array = array.replace("_", " ");
+  }
+  return array;
+};
+const questModal = (value, datas) => {
+  let data = revreplace(datas);
+  let index = questions.findIndex((val) => {
+    return val.question == data;
+  });
+  change_attribute = value;
+  if (index >= 0) {
+    questModalno = index;
+    console.log(index, "index");
+    $("#modals_quest").val(questions[index].question);
+    $("#modals_ans").val(questions[index].answer);
+  }
+};
+const subModal = (datas, value) => {
+  change_attribute = value;
+  let data = revreplace(datas);
+
+  let index = subheading.findIndex((val) => {
+    console.log(val.title, data);
+    return val.title == data;
+  });
+
+  console.log(index);
+  if (index >= 0) {
+    subModalno = index;
+    console.log(datas);
+    $("#modals_title").val(subheading[index].title);
+    $("#modals_url").val(subheading[index].url);
+    $("#modals_description").val(subheading[index].content);
+  }
 };
 
-const modaldeletequestTab = (value) => {
-  questions.splice(value, 1);
-  console.log(value);
-  $(`#modal_quest_tab_container_${value}`).remove();
+const modaldeletequestTab = (value, datas) => {
+  let data = revreplace(datas);
+  let index = questions.findIndex((val) => {
+    return val.question == data;
+  });
+  if (index >= 0) {
+    questions.splice(index, 1);
+
+    $(`#modal_quest_tab_container_${value}`).remove();
+  }
 };
-const modaldeletesubTab = (value) => {
-  subheading.splice(value, 1);
-  $(`#modal_sub_tab_container_${value}`).remove();
+const modaldeletesubTab = (value, datas) => {
+  console.log(subheading);
+  let data = revreplace(datas);
+
+  let index = subheading.findIndex((val) => {
+    return val.title == data;
+  });
+  if (index >= 0) {
+    subheading.splice(index, 1);
+    $(`#modal_sub_tab_container_${value}`).remove();
+  }
+
+  console.log(subheading);
 };
 
-const deletequestTab = (value) => {
-  questions.splice(value, 1);
-  console.log(value);
-  $(`#quest_tab_container_${value}`).remove();
+const deletequestTab = (value, datas) => {
+  let data = revreplace(datas);
+  let index = questions.findIndex((val) => {
+    return val.question == data;
+  });
+  if (index >= 0) {
+    questions.splice(index, 1);
+    console.log(value);
+    $(`#quest_tab_container_${value}`).remove();
+  }
 };
-const deletesubTab = (value) => {
-  subheading.splice(value, 1);
-  $(`#sub_tab_container_${value}`).remove();
+const deletesubTab = (value, datas) => {
+  let data = revreplace(datas);
+
+  let index = subheading.findIndex((val) => {
+    return val.title == data;
+  });
+
+  if (index >= 0) {
+    subheading.splice(value, 1);
+    $(`#sub_tab_container_${value}`).remove();
+  }
 };
 
 const modaldeleteUrls = (value, data) => {
@@ -175,6 +306,9 @@ const deleteBlog = (value, index) => {
 const advanceCreateTags = (array) => {
   tags = [];
   $("#modal_skills_set").empty();
+  $("#modal_skills_set").append(
+    '<input class= "form-control" style = "display: none"   onkeyup = "modaltagInput(event)"      id = "modal_add_skill"  />'
+  );
   array.map((val) => {
     let element = `  <div class="application-tag-container" id="modal_app_tag_${modal_tab_count}">
           <div class="application-tags">${val}
@@ -197,10 +331,12 @@ const advanceCreateTags = (array) => {
 const advanceCreateSubheading = (array) => {
   subheading = [];
   $("#modal_subheading_tabs").empty();
+
   array.map((val) => {
     let { title, url, content } = val;
     let object = { title, url, content };
     subheading.push(object);
+    console.log(title);
 
     let component = `<div class="subheading-tab-container" id="modal_sub_tab_container_${modal_sub_count}">
                   <h5 id=sub_tab_${modal_sub_count}>${title}</h3>
@@ -209,8 +345,12 @@ const advanceCreateSubheading = (array) => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button" class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count})">delete</button>
-                      <button type="button" onclick="subModal(${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
+                      <button id=subheading_delete-btn_${modal_sub_count} type="button" data-heading=${replace(
+      title
+    )} class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
+                      <button type="button" data-heading=${replace(
+                        title
+                      )} id=subheading_edit-btn_${modal_sub_count} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -235,8 +375,12 @@ const advanceCreateQuestions = (array) => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button"  onclick="modaldeletequestTab(${modal_quest_count})" class="btn btn-primary btn-sm">delete</button>
-                      <button type="button" onclick="questModal(${modal_quest_count})" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
+                      <button type="button" id="button_quest_${modal_quest_count}"  data-heading=${replace(
+      question
+    )}  onclick="modaldeletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
+                      <button  data-heading=${replace(
+                        question
+                      )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -284,6 +428,7 @@ const putBlog = async () => {
   heading = $("#modal_heading_input").val();
   imageUrl = $("#modal_url_input").val();
   description = $("#modal_description_input").val();
+  console.log(subheading);
   const res = await axios.put(
     `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?blog=${blog_name}`,
     {
@@ -302,6 +447,7 @@ const putBlog = async () => {
 
   if (res) {
     window.alert("done");
+    populateData();
   }
 };
 const editBlog = async (value) => {
@@ -456,30 +602,40 @@ const deleteUrls = (value, data) => {
 };
 
 const questModalSave = () => {
+  $(`#button_quest_${change_attribute}`).attr(
+    "data-heading",
+    replace($("#modals_quest").val())
+  );
+  $(`#button_quest_edit_${change_attribute}`).attr(
+    "data-heading",
+    replace($("#modals_quest").val())
+  );
   questions[questModalno].question = $("#modals_quest").val();
   questions[questModalno].answer = $("#modals_ans").val();
-  $(`#quest_tab_heading_${questModalno}`).html($("#modal_quest").val());
-  $(`#modal_quest_tab_heading_${questModalno}`).html(
-    questions[questModalno].question
+
+  $(`#quest_tab_heading_${change_attribute}`).html($("#modals_quest").val());
+  $(`#modal_quest_tab_heading_${change_attribute}`).html(
+    $("#modals_quest").val()
   );
+
+  console.log(questions[questModalno], "mm", change_attribute);
 };
 
 const subModalSave = () => {
+  $(`#subheading_edit-btn_${change_attribute}`).attr(
+    "data-heading",
+    replace($("#modals_title").val())
+  );
+  $(`#subheading_delete-btn_${change_attribute}`).attr(
+    "data-heading",
+    replace($("#modals_title").val())
+  );
   subheading[subModalno].title = $("#modals_title").val();
   subheading[subModalno].url = $("#modals_url").val();
   subheading[subModalno].content = $("#modals_description").val();
-  $(`#sub_tab_${subModalno}`).html($("#modals_title").val());
-  $(`#modal_sub_tab_${subModalno}`).html(subheading[subModalno].title);
+  $(`#sub_tab_${change_attribute}`).html($("#modals_title").val());
+  $(`#modal_sub_tab_${change_attribute}`).html($("#modals_title").val());
 };
-
-const subModal = (value) => {
-  subModalno = value;
-  $("#modals_title").val(subheading[value].title);
-  $("#modals_url").val(subheading[value].url);
-  $("#modals_description").val(subheading[value].content);
-};
-
-$;
 
 const subheadingSave = () => {
   let title = $("#subheading_title").val();
@@ -495,8 +651,12 @@ const subheadingSave = () => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button" class="btn btn-primary btn-sm" onclick="deletesubTab(${sub_count})">delete</button>
-                      <button type="button" onclick="subModal(${sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
+                      <button type="button" id=subheading_delete-btn_${sub_count} data-heading=${replace(
+    title
+  )}  class="btn btn-primary btn-sm" onclick="deletesubTab(${sub_count},this.getAttribute('data-heading'))">delete</button>
+                      <button type="button" id=subheading_edit-btn_${sub_count} data-heading=${replace(
+    title
+  )} onclick="subModal(this.getAttribute('data-heading'),${sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -524,8 +684,12 @@ const modalsubheadingSave = () => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button" class="btn btn-primary btn-sm" onclick="deletesubTab(${modal_sub_count})">delete</button>
-                      <button type="button" onclick="subModal(${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
+                      <button type="button" data-heading=${replace(
+                        title
+                      )}  class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
+                      <button type="button" id=subheading_edit-btn_${modal_sub_count} data-heading=${replace(
+    title
+  )} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -544,22 +708,26 @@ const questionSave = () => {
 
   let object = { question, answer };
   questions.push(object);
-  let component = `<div class="subheading-tab-container" id="quest_tab_container_${quest_count}">
-                  <h5 id=quest_tab_heading_${quest_count}>${question}</h3>
+  let component = `<div class="subheading-tab-container" id="quest_tab_container_${modal_quest_count}">
+                  <h5 id=quest_tab_heading_${modal_quest_count}>${question}</h3>
                     <div style="
                                       display: flex;
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button" id="button_quest_${quest_count}" onclick="deletequestTab(${quest_count})" class="btn btn-primary btn-sm">delete</button>
-                      <button type="button" onclick="questModal(${quest_count})" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
+                      <button type="button" data-heading=${replace(
+                        question
+                      )} id="button_quest_${modal_quest_count}" onclick="deletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
+                      <button type="button" id="button_quest_edit_${modal_quest_count}" data-heading=${replace(
+    question
+  )}  type="button" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
 
   let element = document.getElementById("subheading_quest");
   element.insertAdjacentHTML("beforeend", component);
-  quest_count++;
+  modal_quest_count++;
   $("#quest_edit_panel").hide();
 };
 const questionCancel = () => {
@@ -578,8 +746,12 @@ const modalquestionSave = () => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button type="button"  onclick="deletequestTab(${modal_quest_count})" class="btn btn-primary btn-sm">delete</button>
-                      <button type="button" onclick="questModal(${modal_quest_count})" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
+                      <button type="button" id="button_quest_${modal_quest_count}"  data-heading=${replace(
+    question
+  )}  onclick="modaldeletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
+                      <button type="button" data-heading=${replace(
+                        question
+                      )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))"  data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -752,27 +924,7 @@ const submitInfo = async () => {
     $("#description_input").val("");
     $("#heading_input").val("");
     $("#url_input").val("");
-    tags = [];
-    subheading = [];
-    urls = [];
-    questions = [];
-    $("#skills_set").empty();
-    $("#skills_set").append(`<input
-                    class="form-control"
-                    style="display: none;"
-                    onkeyup="tagInput(event)"
-                    id="add_skill"
-                  />`);
-    $("#subheading_tabs").empty();
-
-    $("#subheading_quest").empty();
-
-    $("#url_set").empty();
-    $("#url_set").append(`<input
-                    class="form-control"
-                    style="display: none;"
-                    id="add_url"
-                    onkeyup="urlInputHandle(event)"
-                  />`);
+    refreshVars();
+    cleanForm();
   }
 };
