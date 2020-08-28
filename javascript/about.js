@@ -33,7 +33,7 @@ const replace = (str) => {
 
 const handleUrl = async () => {
   const res = await axios.get(
-    `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${replace(
+    `http://localhost:9000/.netlify/functions/api/blog?heading=${replace(
       window.location.href.split("?")[1]
     )}`
   );

@@ -481,7 +481,7 @@ const editBlog = async (value) => {
 };
 const deleteBlogConfirm = async () => {
   const res = await axios.get(
-    `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/delete?blog=${blog_name}`,
+    `http://localhost:9000/.netlify/functions/api/delete?blog=${blog_name}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
