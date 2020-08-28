@@ -10,12 +10,16 @@ const replace = (str) => {
 };
 const CallApi = async () => {
   axios
-    .get("http://localhost:9000/.netlify/functions/api/featured")
+    .get(
+      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured"
+    )
     .then((res) => {
       featured = res.data.featured;
       console.log(featured, "featured");
     });
-  const res = await axios.get("http://localhost:9000/.netlify/functions/api");
+  const res = await axios.get(
+    "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
+  );
   const data = await res.data;
   let component = document.getElementById("main");
 
