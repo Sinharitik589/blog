@@ -37,6 +37,7 @@ button:focus {
 nav {
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   height: 70px;
   width: 100%;
   padding: 0 10px;
@@ -151,5 +152,9 @@ nav {
     flex-direction: column;
     width: 90%;
     margin: 0 5%;
+  }
+  nav {
+    background-color: white;
+    box-shadow: none;
   }
 }
