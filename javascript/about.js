@@ -123,8 +123,8 @@ const handleUrl = async () => {
     }
   });
 
-  document.getElementById("fb-share-button").dataset["href"] =
-    window.location.href;
+  /*   document.getElementById("fb-share-button").dataset["href"] =
+    window.location.href; */
   $("#loader").hide();
   $("#container,#footer,#banner_ad").show();
 
@@ -149,18 +149,16 @@ const handleUrl = async () => {
       .getElementById(`question_button_${index}`)
       .addEventListener("click", () => {
         $(`#answer_${index}`).toggle();
-        if (flag == 0) {
-          $(`#question_button_${index}`)
-            .html(`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-</svg>`);
-          flag = 1;
-        } else {
+        if ($(`#answer_${index}`).is(":hidden")) {
           $(`#question_button_${index}`)
             .html(`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
 </svg>`);
-          flag = 0;
+        } else {
+          $(`#question_button_${index}`)
+            .html(`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+</svg>`);
         }
       });
   });

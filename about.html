@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -42,13 +41,22 @@
 
     <div class="lo" id="loader">
       <div class="text-center">
-        <div
-          class="spinner-border"
-          role="status"
-          style="width: 5rem; height: 5rem;"
-        >
+      <div style="color: gray;" class="text-center">
+        <h5>loading your content</h5>
+      
+        <div class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
+        <div class="spinner-grow" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
       </div>
     </div>
     <div id="banner_ad">
@@ -74,7 +82,7 @@
             <hr />
             <h5 id="time" style="color: blue;"></h5>
             <img src="" alt="" id="header_img" />
-
+<!-- 
             <div class="icon-container">
               <a
                 href="https://twitter.com/share?ref_src=twsrc%5Etfw"
@@ -101,37 +109,15 @@
                 src="https://platform.twitter.com/widgets.js"
                 charset="utf-8"
               ></script>
-              <div
-                id="fb-share-button"
-                data-href="https://fast-sea-36089.herokuapp.com/"
-                data-layout="button"
-                data-size="large"
-              >
-                <a
-                  target="_blank"
-                  href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wschools.com%2F&amp;src=sdkpreparse"
-                >
-                  <div
-                    class="icon-box"
-                    style="background-color: #306199;"
-                    title="Share On Facebook"
-                  >
-                    <svg
-                      width="30"
-                      height="30"
-                      viewBox="0 0 9 18"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5.842 18V9.79h2.653l.397-3.2h-3.05V4.545c0-.926.247-1.557 1.527-1.557L9 2.988V.126C8.718.087 7.75 0 6.623 0 4.27 0 2.66 1.491 2.66 4.23v2.36H0v3.2h2.66V18h3.182z"
-                        fill-rule="nonzero"
-                        fill="#ffff"
-                      ></path>
-                    </svg>
-                  </div>
-                </a>
-              </div>
-            </div>
+            <iframe
+              src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.w3schools.com%2Fjquery%2Fjquery_callback.asp&layout=button_count&size=small&width=77&height=20&appId"
+              width="77" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
+              allow="encrypted-media"></iframe>
+  <div  data-href="https://sinharitik589.github.io/blog/index.html" data-layout="button_count"
+    data-size="small"><a target="_blank"
+      href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsinharitik589.github.io%2Fblog%2Findex.html&amp;src=sdkpreparse"
+      class="fb-xfbml-parse-ignore">Share</a></div>
+            </div> -->
             <hr />
           </div>
         </div>
@@ -149,7 +135,6 @@
       </div>
     </div>
     <footer id="footer" style="display: none;">
-      <span style="color: white;font-size: large;">Designed and maintained by <span>sinharitik18112835@gmail.com</span> & <span>himanshu@gmail.com</span></span>
     <span>&#169Copyright 2020</span>
      <span>All rights reserved</span>
   </footer>

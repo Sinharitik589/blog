@@ -65,6 +65,17 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  h5 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+
+    font-family: "Merriweather", serif;
+  }
+
+  .spinner-grow {
+    color: gray;
+  }
 }
 header {
   position: relative;

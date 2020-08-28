@@ -89,6 +89,17 @@ footer span span {
           align-items: center;
 }
 
+.lo h5 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  font-family: "Merriweather", serif;
+}
+
+.lo .spinner-grow {
+  color: gray;
+}
+
 header {
   position: relative;
 }

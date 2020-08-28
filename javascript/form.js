@@ -928,3 +928,8 @@ const submitInfo = async () => {
     cleanForm();
   }
 };
+
+const logout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "./admin.html";
+};

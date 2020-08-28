@@ -75,6 +75,10 @@ img {
           align-items: center;
 }
 
+.lo .spinner-grow {
+  color: gray;
+}
+
 mark {
   background-color: #16b3fc;
 }

@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Auth</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/featured.css" />
+    <!-- JS, Popper.js, and jQuery -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -22,6 +30,9 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       redirect = () => {
+        $("#submit_btn").html(
+          '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+        );
         axios
           .post(
             "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/login",
@@ -36,6 +47,7 @@
           })
           .catch((err) => {
             window.alert("Wrong Credentials");
+            $("#submit_btn").html("Login");
             console.log(err);
           });
       };
@@ -51,26 +63,25 @@
         background-color: #ffff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         height: 300px;
-        width: 50%;
+        width: 40%;
+
         display: flex;
         justify-content: center;
 
         flex-direction: column;
       }
-      input {
-        width: 50%;
-        margin: 0 25%;
-        margin-bottom: 20px;
-        height: 20px;
-      }
-      label {
-        margin-left: 25%;
-        margin-bottom: 10px;
-      }
-      button {
-        width: 30%;
-        margin: 0 35%;
-        height: 30px;
+
+      @media screen and (max-width: 900px) {
+        .panel {
+          background-color: #ffff;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          height: 300px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -83,13 +94,42 @@
         }
       });
     </script>
-    <div class="dialog">
-      <div class="panel">
-        <label>Username</label>
-        <input id="name" />
+    <div class="dialog container">
+      <div class="panel container">
+        <!-- <label>Username</label>
+        <input class="form-control" id="name" />
         <label>Password</label>
-        <input id="password" type="password" />
-        <button onclick="redirect()">Login</button>
+        <input class="form-control" id="password" type="password" />
+        <button onclick="redirect()">Login</button> -->
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="name"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+
+        <button
+          onclick="redirect()"
+          type="submit"
+          id="submit_btn"
+          class="btn btn-primary"
+        >
+          Login
+        </button>
       </div>
     </div>
   </body>

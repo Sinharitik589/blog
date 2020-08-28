@@ -51,8 +51,25 @@ button:focus {
 }
 
 nav {
-  background-color: grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: 70px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+nav .rows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+nav .rows div {
   width: 100%;
 }
 
