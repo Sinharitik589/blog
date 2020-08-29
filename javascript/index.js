@@ -34,7 +34,10 @@ const replace = (str) => {
 const CallApi = async () => {
   axios
     .get(
-      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured"
+      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
+      {
+        timeout: 5000,
+      }
     )
     .then((res) => {
       featured = res.data.featured;
