@@ -34,8 +34,8 @@ const replace = (str) => {
 const CallApi = () => {
   let component = document.getElementById("main");
   axios
-    .get("https://zen-newton-5723fe.netlify.app/.netlify/functions/api", {
-      timeout: 3000,
+    .get("http://localhost:9000/.netlify/functions/api", {
+      timeout: 5000,
     })
     .then((res) => {
       const data = res.data.arr;

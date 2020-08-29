@@ -328,6 +328,7 @@
                 onclick="submitInfo()"
                 type="button"
                 class="btn btn-primary btn-lg"
+                id="saveBlogConfirm"
               >
                 Submit
               </button>
@@ -628,8 +629,13 @@
               >
                 Close
               </button>
-              <button onclick="putBlog()" type="button" class="btn btn-primary">
-                Save changes
+              <button
+                onclick="putBlog()"
+                id="editBlogConfirm"
+                type="button"
+                class="btn btn-primary"
+              >
+                Save Changes
               </button>
             </div>
           </div>
@@ -746,6 +752,7 @@
                 type="button"
                 onclick="deleteBlogConfirm()"
                 class="btn btn-primary"
+                id="deleteBlogConfirm"
               >
                 Confirm
               </button>

@@ -425,6 +425,9 @@ const advanceCreateUrls = (array) => {
 };
 
 const putBlog = async () => {
+  $("#editBlogConfirm").html(
+    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+  );
   heading = $("#modal_heading_input").val();
   imageUrl = $("#modal_url_input").val();
   description = $("#modal_description_input").val();
@@ -446,6 +449,7 @@ const putBlog = async () => {
   );
 
   if (res) {
+    $("#editBlogConfirm").html("Save Changes");
     window.alert("done");
     populateData();
   }
@@ -480,37 +484,68 @@ const editBlog = async (value) => {
   advanceCreateUrls(urls);
 };
 const deleteBlogConfirm = async () => {
-  const res = await axios.get(
-    `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/delete?blog=${blog_name}`,
-    {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }
+  $("#deleteBlogConfirm").html(
+    'Deleting<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
   );
+  axios
+    .get(
+      `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/delete?blog=${blog_name}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    )
+    .then((res) => {
+      if (res.status == 200) {
+        let index = featured.findIndex((val) => {
+          console.log(val, blog_name);
+          val == blog_name;
+        });
+        console.log(index, featured, blog_name);
+        if (index >= 0) {
+          featured.splice(index, 1);
+          console.log(featured);
+          axios
+            .post(
+              "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
+              {
+                featured,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              }
+            )
+            .then((res) => {
+              if (res.status == 200) {
+                $("#deleteBlogConfirm").html("Confirm");
+                $("#deleteModal").modal("hide");
 
-  if (res.status == 200) {
-    $("#deleteModal").modal("hide");
-    $(`#edit_blog_tab_${index_value}`).remove();
-  }
+                $(`#edit_blog_tab_${index_value}`).remove();
+              }
+            });
+        } else {
+          /*  $("#deleteBlogConfirm").html("Confirm");
+          $("#deleteModal").modal("hide");
+
+          $(`#edit_blog_tab_${index_value}`).remove(); */
+        }
+      }
+    });
 };
 const populateData = async () => {
   $("#blog_tabs").empty();
   $("#featured-tab").empty();
 
   axios
-    .get(
-      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured"
-    )
+    .get("https://zen-newton-5723fe.netlify.app/.netlify/functions/api", {
+      timeout: 5000,
+    })
     .then((res) => {
-      featured = res.data.featured;
-      console.log(featured, "featured");
-    });
-  const res = await axios.get(
-    "https://zen-newton-5723fe.netlify.app/.netlify/functions/api"
-  );
-  const data = await res.data;
-
-  data.map((value, index) => {
-    let element = `<div class="col-md-6 col-sm-12" id=edit_blog_tab_${index}>
+      const data = res.data.arr;
+      featured = res.data.object.featured;
+      data.map((value, index) => {
+        let element = `<div class="col-md-6 col-sm-12" id=edit_blog_tab_${index}>
               <div class="edit-blog-tab" >
                 <img src="${value.imageUrl}"
                   alt="" />
@@ -533,14 +568,14 @@ const populateData = async () => {
               </div>
             </div>`;
 
-    let component = document.getElementById("blog_tabs");
-    component.insertAdjacentHTML("afterbegin", element);
-    let flag = featured.findIndex((val) => {
-      return val == value.heading;
-    });
+        let component = document.getElementById("blog_tabs");
+        component.insertAdjacentHTML("afterbegin", element);
+        let flag = featured.findIndex((val) => {
+          return val == value.heading;
+        });
 
-    if (flag >= 0) {
-      $("#featured-tab").append(`<div
+        if (flag >= 0) {
+          $("#featured-tab").append(`<div
              
               class="featured-tab"
               data-heading="${value.heading}"
@@ -550,8 +585,8 @@ const populateData = async () => {
             >
               ${value.heading}
             </div>`);
-    } else {
-      $("#featured-tab").append(`<div
+        } else {
+          $("#featured-tab").append(`<div
              
               class="featured-tab"
               data-heading="${value.heading}"
@@ -561,10 +596,15 @@ const populateData = async () => {
             >
               ${value.heading}
             </div>`);
-    }
-  });
-
-  console.log(data);
+        }
+      });
+    })
+    .catch((err) => {
+      if (err.code == "ECONNABORTED") {
+        populateData();
+        console.log("calling again");
+      }
+    });
 };
 $(document).ready(populateData);
 
@@ -881,6 +921,9 @@ const modalurlInputHandle = (event) => {
 };
 
 const submitInfo = async () => {
+  $("#saveBlogConfirm").html(
+    '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+  );
   let category = $("#categories :selected").val();
   description = $("#description_input").val();
   heading = $("#heading_input").val();
@@ -920,6 +963,7 @@ const submitInfo = async () => {
 
   if (res) {
     window.alert("done");
+    $("#saveBlogConfirm").html("Submit");
     populateData();
     $("#description_input").val("");
     $("#heading_input").val("");
