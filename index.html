@@ -37,32 +37,37 @@
     <script src="./javascript/index.js"></script>
   </head>
   <body onload="CallApi()">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark ">
-      <a class="navbar-brand" href="">Blog</a>
-     
-    </nav>
+  <nav>
+    <div class="rows">
+      <div style="flex: 3; font-size: larger;"><img src="./logo.png" alt="" style="height: 60px; width: 60px;"></div>
+  
+      <div style="display: flex; flex: 9; flex-direction: row-reverse">
+        
+      </div>
+    </div>
+  </nav>
 
     <div class="lo" id="loader">
-      <div style="color: gray;" class="text-center">
-        <h5>loading your content</h5>
+      <div  class="text-center">
+        <span  id="quotes"></span><br/>
         
-      <div  class="spinner-grow" role="status">
+      <div style="color:black; width: 1.4rem; height: 1.4rem;"  class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <div class="spinner-grow" role="status">
+      <div style=" color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
+        <span  class="sr-only">Loading...</span>
+      </div>
+      <div style="color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <div class="spinner-grow" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow" role="status">
+      <div style="color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
       </div>
     </div>
 
     <div style="display: none;" class="container" id="container">
-      <hr style="margin-top: 100px;" />
+      <hr style="margin-top:70px;" />
       <div class="slide-control">
         <div
           id="carouselExampleCaptions"

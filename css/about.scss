@@ -214,6 +214,27 @@ footer {
   border-radius: 4px;
   padding: 3px 5px;
 }
+nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+
+  z-index: 1450;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: white;
+
+  .rows {
+    display: flex;
+    width: 100%;
+    div {
+      width: 100%;
+    }
+  }
+}
 #tag {
   display: flex;
   justify-content: center;
@@ -236,7 +257,16 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
+#quotes {
+  width: 50%;
 
+  margin: 0 25%;
+  display: flex;
+  justify-content: center;
+  font-family: "EB Garamond", serif;
+  font-size: larger;
+  color: black;
+}
 @media screen and (max-width: 900px) {
   img {
     width: 100%;
@@ -252,5 +282,10 @@ footer {
       width: 60%;
       margin: 0 20%;
     }
+  }
+  #quotes {
+    width: 80%;
+
+    margin: 0 10%;
   }
 }

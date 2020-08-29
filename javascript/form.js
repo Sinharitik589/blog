@@ -124,15 +124,27 @@ const featuredSelection = (event, data) => {
   }
 };
 const featureSubmit = async () => {
-  const res = axios.post(
-    "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
-    {
-      featured,
-    },
-    {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }
+  $("#featureSubmit").html(
+    'Confuring <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
   );
+  axios
+    .post(
+      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
+      {
+        featured,
+      },
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    )
+    .then((res) => {
+      if (res.status == 200) {
+        $("#featureSubmit").html("Save Changes");
+      }
+    })
+    .catch((err) => {
+      window.alert("Request Denied");
+    });
 
   if (res.status == 200) {
     window.alert("done");
@@ -483,7 +495,7 @@ const editBlog = async (value) => {
   advanceCreateQuestions(questions);
   advanceCreateUrls(urls);
 };
-const deleteBlogConfirm = async () => {
+const deleteBlogConfirm = () => {
   $("#deleteBlogConfirm").html(
     'Deleting<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
   );
@@ -498,7 +510,7 @@ const deleteBlogConfirm = async () => {
       if (res.status == 200) {
         let index = featured.findIndex((val) => {
           console.log(val, blog_name);
-          val == blog_name;
+          return val == blog_name;
         });
         console.log(index, featured, blog_name);
         if (index >= 0) {
@@ -521,19 +533,19 @@ const deleteBlogConfirm = async () => {
                 $("#deleteBlogConfirm").html("Confirm");
                 $("#deleteModal").modal("hide");
 
-                $(`#edit_blog_tab_${index_value}`).remove();
+                populateData();
               }
             });
         } else {
-          /*  $("#deleteBlogConfirm").html("Confirm");
+          $("#deleteBlogConfirm").html("Confirm");
           $("#deleteModal").modal("hide");
 
-          $(`#edit_blog_tab_${index_value}`).remove(); */
+          populateData();
         }
       }
     });
 };
-const populateData = async () => {
+const populateData = () => {
   $("#blog_tabs").empty();
   $("#featured-tab").empty();
 
@@ -543,7 +555,9 @@ const populateData = async () => {
     })
     .then((res) => {
       const data = res.data.arr;
-      featured = res.data.object.featured;
+      featured = res.data.featured;
+
+      console.log(data, res.data);
       data.map((value, index) => {
         let element = `<div class="col-md-6 col-sm-12" id=edit_blog_tab_${index}>
               <div class="edit-blog-tab" >

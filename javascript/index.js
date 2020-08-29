@@ -1,4 +1,10 @@
 var featured = [];
+var quotes = [
+  "Patience is not the ability to wait, but the ability to keep a good attitude while waiting",
+  "Patience and perseverance have a magical effect before which difficulties disappear and obstacles vanish",
+  "Imagination is more important than knowledge",
+  "Technology is anything that wasn’t around when you were born. - Alan Kay",
+];
 var featured_flag = 0;
 const week_days = [
   "Sunday",
@@ -32,14 +38,16 @@ const replace = (str) => {
   return array;
 };
 const CallApi = () => {
+  let rand = Math.floor(Math.random() * quotes.length);
+  $("#quotes").html(quotes[rand]);
   let component = document.getElementById("main");
   axios
-    .get("http://localhost:9000/.netlify/functions/api", {
+    .get("https://zen-newton-5723fe.netlify.app/.netlify/functions/api", {
       timeout: 5000,
     })
     .then((res) => {
       const data = res.data.arr;
-      featured = res.data.object.featured;
+      featured = res.data.featured;
       console.log(data, featured);
       data.map((value, i) => {
         let times = new Date(value.createdAt);

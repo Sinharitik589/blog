@@ -188,6 +188,8 @@ nav .rows div {
     display: -ms-flexbox;
     display: flex;
     height: 50px;
+    position: fixed;
+    top: 70px;
     padding: 0;
     z-index: 1030;
     -webkit-box-orient: horizontal;
@@ -216,6 +218,11 @@ nav .rows div {
   }
   .label_heading {
     text-align: center;
+  }
+  #home0,
+  #home1,
+  #home2 {
+    margin-top: 140px;
   }
   .label-button {
     display: -webkit-box;
@@ -246,6 +253,9 @@ nav .rows div {
     background-color: white;
     -webkit-box-shadow: none;
             box-shadow: none;
+    z-index: 1030;
+    position: fixed;
+    top: 0;
   }
 }
 /*# sourceMappingURL=featured.css.map */

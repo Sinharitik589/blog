@@ -19,6 +19,7 @@ button:focus {
   padding: 0;
   position: sticky;
   top: 0px;
+
   color: #7a80b4;
   display: flex;
   height: 100vh;
@@ -37,6 +38,7 @@ button:focus {
 nav {
   display: flex;
   align-items: center;
+
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   height: 70px;
   width: 100%;
@@ -122,6 +124,8 @@ nav {
   .side_nav {
     display: flex;
     height: 50px;
+    position: fixed;
+    top: 70px;
     padding: 0;
     z-index: 1030;
     flex-direction: row;
@@ -140,7 +144,11 @@ nav {
   .label_heading {
     text-align: center;
   }
-
+  #home0,
+  #home1,
+  #home2 {
+    margin-top: 140px;
+  }
   .label-button {
     display: flex;
     justify-content: center;
@@ -158,5 +166,8 @@ nav {
   nav {
     background-color: white;
     box-shadow: none;
+    z-index: 1030;
+    position: fixed;
+    top: 0;
   }
 }

@@ -34,33 +34,37 @@
   </head>
 
   <body onload="handleUrl()">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="./index.html">Blogs</a>
-     
+    <nav>
+      <div class="rows">
+        <div style="flex: 3; font-size: larger;"><a href="/"><img src="./logo.png" alt="" style="height: 60px; width: 60px;"></a></div>
+    
+        <div style="display: flex; flex: 9; flex-direction: row-reverse">
+    
+        </div>
+      </div>
     </nav>
 
     <div class="lo" id="loader">
       <div class="text-center">
-      <div style="color: gray;" class="text-center">
-        <h5>loading your content</h5>
-      
-        <div class="spinner-grow" role="status">
+      <div  class="text-center">
+        <span id="quotes"></span><br />
+        <div style="color:black; width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-        <div class="spinner-grow" role="status">
+        <div style=" color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-        <div class="spinner-grow" role="status">
+        <div style="color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-        <div class="spinner-grow" role="status">
+        <div style="color:black;width: 1.4rem; height: 1.4rem;" class="spinner-grow" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
       </div>
     </div>
     <div id="banner_ad">
-      <hr style="margin-top: 100px;" />
+      <hr style="margin-top:70px;" />
       <div class="banner-ad">
         Space for ad
       </div>

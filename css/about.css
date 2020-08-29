@@ -279,6 +279,35 @@ footer span span {
   padding: 3px 5px;
 }
 
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  top: 0;
+  z-index: 1450;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: white;
+}
+
+nav .rows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+nav .rows div {
+  width: 100%;
+}
+
 #tag {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -317,6 +346,20 @@ footer span span {
           align-items: center;
 }
 
+#quotes {
+  width: 50%;
+  margin: 0 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: "EB Garamond", serif;
+  font-size: larger;
+  color: black;
+}
+
 @media screen and (max-width: 900px) {
   img {
     width: 100%;
@@ -332,6 +375,10 @@ footer span span {
     height: 200px;
     width: 60%;
     margin: 0 20%;
+  }
+  #quotes {
+    width: 80%;
+    margin: 0 10%;
   }
 }
 /*# sourceMappingURL=about.css.map */

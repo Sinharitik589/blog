@@ -1,8 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap");
 body {
   overflow-x: hidden;
+}
+nav {
+  display: flex;
+  /* position: sticky;
+  top: 0; */
+  position: fixed;
+  top: 0;
+
+  z-index: 1450;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  height: 70px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: white;
+
+  .rows {
+    display: flex;
+    width: 100%;
+    div {
+      width: 100%;
+    }
+  }
 }
 img {
   padding: 0;
@@ -148,6 +172,16 @@ img {
   width: 60%;
   margin: 0 20%;
 }
+#quotes {
+  width: 50%;
+
+  margin: 0 25%;
+  display: flex;
+  justify-content: center;
+  font-family: "EB Garamond", serif;
+  font-size: larger;
+  color: black;
+}
 @media screen and (max-width: 900px) {
   .carousel-item {
     img {
@@ -202,5 +236,11 @@ img {
       margin: 0 2%;
       margin-bottom: 20px;
     }
+  }
+
+  #quotes {
+    width: 80%;
+
+    margin: 0 10%;
   }
 }
