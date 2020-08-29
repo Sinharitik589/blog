@@ -36,7 +36,10 @@ const handleUrl = () => {
     .get(
       `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${replace(
         window.location.href.split("?")[1]
-      )}`
+      )}`,
+      {
+        timeout: 3000,
+      }
     )
     .then((res) => {
       const data = res.data;
@@ -53,6 +56,19 @@ const handleUrl = () => {
         username,
       } = data[0];
       console.log(tags);
+      const replaceContentUrl = (str) => {
+        let string = str;
+        console.log("called", urls);
+        urls.map((value) => {
+          console.log(value, "value");
+          string = string.replace(
+            `${value.keyword}`,
+            `<a href=${value.url}>${value.keyword}</a>`
+          );
+        });
+
+        return string;
+      };
       let times = new Date(createdAt);
       let day = week_days[times.getDay()];
       let date = times.getDate();
@@ -112,8 +128,6 @@ const handleUrl = () => {
 
       /*   document.getElementById("fb-share-button").dataset["href"] =
         window.location.href; */
-      $("#loader").hide();
-      $("#container,#footer,#banner_ad").show();
 
       // these statements will creates the side content(question)
 
@@ -149,22 +163,15 @@ const handleUrl = () => {
             }
           });
       });
-      const replaceContentUrl = (str) => {
-        let string = str;
-        console.log("called", urls);
-        urls.map((value) => {
-          console.log(value, "value");
-          string = string.replace(
-            `${value.keyword}`,
-            `<a href=${value.url}>${value.keyword}</a>`
-          );
-        });
 
-        return string;
-      };
+      $("#loader").hide();
+      $("#container,#footer,#banner_ad").show();
     })
     .catch((err) => {
-      console.log(err);
+      if (err.code == "ECONNABORTED") {
+        handleUrl();
+        console.log("calling again");
+      }
     });
 
   // these statements will creates the main content

@@ -31,29 +31,16 @@ const replace = (str) => {
   }
   return array;
 };
-const CallApi = async () => {
-  axios
-    .get(
-      "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
-      {
-        timeout: 5000,
-      }
-    )
-    .then((res) => {
-      featured = res.data.featured;
-      console.log(featured, "featured");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
+const CallApi = () => {
   let component = document.getElementById("main");
   axios
     .get("https://zen-newton-5723fe.netlify.app/.netlify/functions/api", {
-      timeout: 5000,
+      timeout: 3000,
     })
     .then((res) => {
-      const data = res.data;
+      const data = res.data.arr;
+      featured = res.data.object.featured;
+      console.log(data, featured);
       data.map((value, i) => {
         let times = new Date(value.createdAt);
         let day = week_days[times.getDay()];
@@ -170,6 +157,9 @@ const CallApi = async () => {
       $("#container,#footer").show();
     })
     .catch((err) => {
-      console.log(err);
+      if (err.code == "ECONNABORTED") {
+        CallApi();
+        console.log("calling again");
+      }
     });
 };
