@@ -50,6 +50,12 @@ const CallApi = () => {
       featured = res.data.featured;
       console.log(data, featured);
       data.map((value, i) => {
+        /* let head = document.getElementsByTagName("head");
+        let meta = document.createElement("meta");
+        meta.name = "description";
+        meta.content = value.description;
+        head.appendChild(meta); */
+
         let times = new Date(value.createdAt);
         let day = week_days[times.getDay()];
         let date = times.getDate();
