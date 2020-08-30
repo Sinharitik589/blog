@@ -63,10 +63,11 @@ const handleUrl = () => {
         createdAt,
         username,
       } = data[0];
-      const metaRobots = document.createElement("meta");
+      /*   const metaRobots = document.createElement("meta");
       metaRobots.name = "description";
       metaRobots.content = description;
-      document.head.appendChild(metaRobots);
+      document.head.appendChild(metaRobots); */
+      $("meta[name=description]").attr("content", description);
       const replaceContentUrl = (str) => {
         let string = str;
         console.log("called", urls);
