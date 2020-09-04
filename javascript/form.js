@@ -1,4 +1,4 @@
-var heading, description, imageUrl, blog_name, index_value;
+var heading, description, imageUrl, blog_name, index_value, meta_description;
 var tags = [];
 
 var questions = [];
@@ -443,6 +443,7 @@ const putBlog = async () => {
   heading = $("#modal_heading_input").val();
   imageUrl = $("#modal_url_input").val();
   description = $("#modal_description_input").val();
+  meta_description = $("#modal_meta_description_input").val();
   console.log(subheading);
   const res = await axios.put(
     `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?blog=${blog_name}`,
@@ -450,6 +451,7 @@ const putBlog = async () => {
       heading,
       imageUrl,
       description,
+      meta_description,
       subheading,
       tags,
       questions,
@@ -476,7 +478,7 @@ const editBlog = async (value) => {
     heading,
     imageUrl,
     description,
-
+    meta_description,
     tags,
 
     urls,
@@ -489,6 +491,7 @@ const editBlog = async (value) => {
   $("#modal_heading_input").val(heading);
   $("#modal_url_input").val(imageUrl);
   $("#modal_description_input").val(description);
+  $("#modal_meta_description_input").val(meta_description);
   blog_name = heading;
   advanceCreateTags(tags);
   advanceCreateSubheading(subheading);
@@ -940,6 +943,7 @@ const submitInfo = async () => {
   );
   let category = $("#categories :selected").val();
   description = $("#description_input").val();
+  meta_description = $("#meta_description_input").val();
   heading = $("#heading_input").val();
   imageUrl = $("#url_input").val();
   console.log(

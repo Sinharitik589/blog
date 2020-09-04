@@ -32,7 +32,7 @@ const months = [
 
 const replace = (str) => {
   let array = str;
-  for (i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i++) {
     array = array.replace(" ", "_");
   }
   return array;
@@ -113,8 +113,8 @@ const CallApi = () => {
                     flex-direction: column;
                     width: 100%;
                     height: 100%;
-                    color: white;
-                    background-color: #0009;
+                      color: white;
+                      background-color: #0009;
                   "
                 >
                   <div>
