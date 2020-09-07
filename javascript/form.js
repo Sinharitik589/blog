@@ -1,4 +1,10 @@
-var heading, description, imageUrl, blog_name, index_value, meta_description;
+var heading,
+  description,
+  imageUrl,
+  blog_name,
+  index_value,
+  meta_description,
+  category;
 var tags = [];
 
 var questions = [];
@@ -219,9 +225,13 @@ const subModal = (datas, value) => {
   if (index >= 0) {
     subModalno = index;
     console.log(datas);
+    console.log(subheading[index]);
     $("#modals_title").val(subheading[index].title);
     $("#modals_url").val(subheading[index].url);
     $("#modals_description").val(subheading[index].content);
+    $("#modals_key_features").val(subheading[index].key_feature);
+    $("#modals_cons").val(subheading[index].cons);
+    $("#modals_pros").val(subheading[index].pros);
   }
 };
 
@@ -345,10 +355,9 @@ const advanceCreateSubheading = (array) => {
   $("#modal_subheading_tabs").empty();
 
   array.map((val) => {
-    let { title, url, content } = val;
-    let object = { title, url, content };
+    let { title, url, content, key_feature, pros, cons } = val;
+    let object = { title, url, content, key_feature, pros, cons };
     subheading.push(object);
-    console.log(title);
 
     let component = `<div class="subheading-tab-container" id="modal_sub_tab_container_${modal_sub_count}">
                   <h5 id=sub_tab_${modal_sub_count}>${title}</h3>
@@ -440,7 +449,7 @@ const putBlog = async () => {
   $("#editBlogConfirm").html(
     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
   );
-  let category = $("#modal_category").val();
+  category = $("#modal_category").val();
   heading = $("#modal_heading_input").val();
   imageUrl = $("#modal_url_input").val();
   description = $("#modal_description_input").val();
@@ -488,6 +497,8 @@ const editBlog = async (value) => {
   } = data[0];
   questions = data[0].questions;
   subheading = data[0].subheading;
+  console.log(data[0].subheading);
+  console.log(subheading);
 
   $("#modal_heading_input").val(heading);
   $("#modal_url_input").val(imageUrl);
@@ -692,6 +703,9 @@ const subModalSave = () => {
   subheading[subModalno].title = $("#modals_title").val();
   subheading[subModalno].url = $("#modals_url").val();
   subheading[subModalno].content = $("#modals_description").val();
+  subheading[subModalno].key_feature = $("#modals_key_features").val();
+  subheading[subModalno].cons = $("#modals_cons").val();
+  subheading[subModalno].pros = $("#modals_pros").val();
   $(`#sub_tab_${change_attribute}`).html($("#modals_title").val());
   $(`#modal_sub_tab_${change_attribute}`).html($("#modals_title").val());
 };
@@ -700,7 +714,11 @@ const subheadingSave = () => {
   let title = $("#subheading_title").val();
   let url = $("#subheading_url").val();
   let content = $("#subheading_description").val();
-  let object = { title, url, content };
+
+  let key_feature = $("#subheading_key_features").val();
+  let pros = $("#subheading_pros").val();
+  let cons = $("#subheading_cons").val();
+  let object = { title, url, content, key_feature, pros, cons };
   subheading.push(object);
 
   let component = `<div class="subheading-tab-container" id="sub_tab_container_${sub_count}">
@@ -733,7 +751,10 @@ const modalsubheadingSave = () => {
   let title = $("#modal_subheading_title").val();
   let url = $("#modal_subheading_url").val();
   let content = $("#modal_subheading_description").val();
-  let object = { title, url, content };
+  let key_feature = $("#modal_subheading_key_features").val();
+  let cons = $("#modal_subheading_cons").val();
+  let pros = $("#modal_subheading_pros").val();
+  let object = { title, url, content, key_feature, pros, cons };
   subheading.push(object);
 
   let component = `<div class="subheading-tab-container" id="modal_sub_tab_container_${modal_sub_count}">
@@ -943,7 +964,7 @@ const submitInfo = async () => {
   $("#saveBlogConfirm").html(
     '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
   );
-  let category = $("#category").val();
+  category = $("#category").val();
   description = $("#description_input").val();
   meta_description = $("#meta_description_input").val();
   heading = $("#heading_input").val();
