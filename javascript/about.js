@@ -39,9 +39,11 @@ const replace = (str) => {
 const renderList = (arr) => {
   let un = document.createElement("ul");
   array = arr.split(",").map((val) => {
-    let lst = document.createElement("li");
-    lst.innerText = val;
-    un.appendChild(lst);
+    if (val.length > 0) {
+      let lst = document.createElement("li");
+      lst.innerText = val;
+      un.appendChild(lst);
+    }
   });
   return un;
 };
