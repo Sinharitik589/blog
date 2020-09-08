@@ -187,13 +187,13 @@ const handleUrl = () => {
 
       // these statements will creates the side content(question)
 
-      let tag = document.getElementById("tag");
+      /*     let tag = document.getElementById("tag");
 
       tags.map((value) => {
         let arr = `<div class="chip-wrapper"><div class="chip">${value}</div></div>`;
         tag.insertAdjacentHTML("beforeend", arr);
       });
-
+ */
       let qcomponent = document.getElementById("quest");
       const openAnswer = (id) => {};
       questions.map((value, index) => {
