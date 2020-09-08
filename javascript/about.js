@@ -36,7 +36,15 @@ const replace = (str) => {
   }
   return array;
 };
-
+const renderList = (arr) => {
+  let un = document.createElement("ul");
+  array = arr.split(",").map((val) => {
+    let lst = document.createElement("li");
+    lst.innerText = val;
+    un.appendChild(lst);
+  });
+  return un;
+};
 const handleUrl = () => {
   let rand = Math.floor(Math.random() * quotes.length);
   $("#quotes").html(quotes[rand]);
@@ -124,18 +132,52 @@ const handleUrl = () => {
           img.insertAdjacentHTML("beforeend", `<img src=${value.url}></img>`);
         }
         arr.appendChild(img);
+
         let cont = document.createElement("p");
         cont.innerHTML = content_final;
         arr.appendChild(cont);
 
         main.appendChild(arr);
-        if (
+        if (value.key_feature.length > 0) {
+          let key = document.createElement("div");
+          key.className = "pro-con";
+          let head = document.createElement("div");
+          head.style.backgroundColor = "blue";
+          head.innerText = "Key feature";
+          key.appendChild(head);
+          let array = renderList(value.key_feature);
+          key.appendChild(array);
+          arr.appendChild(key);
+        }
+        if (value.key_feature.length > 0) {
+          let key = document.createElement("div");
+          key.className = "pro-con";
+          let head = document.createElement("div");
+          head.style.backgroundColor = "red";
+          head.innerText = "Key feature";
+          key.appendChild(head);
+          let array = renderList(value.pros);
+          key.appendChild(array);
+          arr.appendChild(key);
+        }
+        if (value.key_feature.length > 0) {
+          let key = document.createElement("div");
+          key.className = "pro-con";
+          let head = document.createElement("div");
+          head.style.backgroundColor = "green";
+          head.innerText = "Key feature";
+          key.appendChild(head);
+          let array = renderList(value.cons);
+          key.appendChild(array);
+          arr.appendChild(key);
+        }
+        /*  if (
           index == "0" ||
           index == subheading.length - 1 ||
           index == subheading.length / 2
         ) {
           main.insertAdjacentHTML("beforeend", ad);
-        }
+        } */
       });
 
       /*   document.getElementById("fb-share-button").dataset["href"] =
