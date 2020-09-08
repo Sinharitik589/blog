@@ -24,8 +24,8 @@ body {
 
 p {
   font-family: "Merriweather", serif;
-  font-size: 20px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.5;
   font-weight: 500;
   color: #314351;
 }
@@ -383,7 +383,10 @@ nav .rows div {
     height: 350px;
   }
   .subheading {
-    padding: 20px 0;
+    padding: 5px 0;
+  }
+  .subheading p {
+    line-height: 1.3;
   }
   .subheading-image {
     margin: 15px 0;

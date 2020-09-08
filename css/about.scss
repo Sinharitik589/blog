@@ -21,8 +21,8 @@ body {
 }
 p {
   font-family: "Merriweather", serif;
-  font-size: 20px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.5;
 
   font-weight: 500;
   color: #314351;
@@ -43,6 +43,7 @@ img {
   font-family: "Teko", sans-serif;
   margin: 20px 0;
 }
+
 .subheading {
   padding: 15px 20px;
   z-index: -1;
@@ -290,7 +291,10 @@ nav {
     height: 350px;
   }
   .subheading {
-    padding: 20px 0;
+    padding: 5px 0;
+    p {
+      line-height: 1.3;
+    }
   }
   .subheading-image {
     margin: 15px 0;
