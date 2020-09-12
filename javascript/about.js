@@ -151,23 +151,23 @@ const handleUrl = () => {
           key.appendChild(array);
           arr.appendChild(key);
         }
-        if (value.key_feature.length > 0) {
+        if (value.pros.length > 0) {
           let key = document.createElement("div");
           key.className = "pro-con";
           let head = document.createElement("div");
-          head.style.backgroundColor = "red";
-          head.innerText = "Key feature";
+          head.style.backgroundColor = "green";
+          head.innerText = "Pros";
           key.appendChild(head);
           let array = renderList(value.pros);
           key.appendChild(array);
           arr.appendChild(key);
         }
-        if (value.key_feature.length > 0) {
+        if (value.cons.length > 0) {
           let key = document.createElement("div");
           key.className = "pro-con";
           let head = document.createElement("div");
-          head.style.backgroundColor = "green";
-          head.innerText = "Key feature";
+          head.style.backgroundColor = "red";
+          head.innerText = "Cons";
           key.appendChild(head);
           let array = renderList(value.cons);
           key.appendChild(array);
