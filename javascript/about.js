@@ -74,6 +74,7 @@ const handleUrl = () => {
         createdAt,
         username,
       } = data[0];
+      console.log(conclusion);
       /*   const metaRobots = document.createElement("meta");
       metaRobots.name = "description";
       metaRobots.content = description;
@@ -178,7 +179,7 @@ const handleUrl = () => {
           let element = document.createElement("div");
           element.className = "row ";
           let child =
-            `<a href=${value.amazon} class="col-md-4 buy-button"><img  style="margin:0;padding:0" src="https://i.pinimg.com/originals/08/5f/d8/085fd8f7819dee3b716da73d3b2de61c.jpg"/><div >Buy on amazon</div></a><a  class="col-md-4 offset-md-4 buy-button" href=${value.flipkart}><img  style="margin:0;padding:0" src="https://latestnews.fresherslive.com/images/articles/ians/origin/2020/07/14/walmart-led-investors-pump-in-12-bn-in-flipkart-group-5f0da8994d322-1594730649.jpg"/><div style="background-color:#154db3;color:white" >Buy on flipkart</div></a>`;
+            `<a href=${value.amazon} class="col-md-4 buy-button"><img  style="margin:0;padding:0" src="https://i.pinimg.com/originals/08/5f/d8/085fd8f7819dee3b716da73d3b2de61c.jpg"/><div >Buy on amazon</div></a><a  class="col-md-4 offset-md-4 buy-button" href=${value.flipkart}><img  style="margin:0;padding:0" src="https://latestnews.fresherslive.com/images/articles/ians/origin/2020/07/14/walmart-led-investors-pump-in-12-bn-in-flipkart-group-5f0da8994d322-1594730649.jpg"/><div style="background-color:#0b275b;color:white" >Buy on flipkart</div></a>`;
           element.insertAdjacentHTML("beforeend", child);
           arr.appendChild(element);
         }
@@ -191,11 +192,16 @@ const handleUrl = () => {
         } */
       });
       if (conclusion.length > 0) {
+        console.log(conclusion);
         let concl = document.createElement("div");
         concl.className = "subheading";
-        concl.innerText = conclusion;
+
         let head = document.createElement("h3");
         head.innerText = "Conclusion";
+        concl.appendChild(head);
+        let cont = document.createElement("p");
+        cont.innerText = conclusion;
+        concl.appendChild(cont);
         main.appendChild(concl);
       }
 

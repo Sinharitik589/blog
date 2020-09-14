@@ -336,8 +336,8 @@ const advanceCreateSubheading = (array) => {
   $("#modal_subheading_tabs").empty();
 
   array.map((val) => {
-    let { title, url, content, key_feature, pros, cons } = val;
-    let object = { title, url, content, key_feature, pros, cons };
+    let { title, url, content, key_feature, pros, cons, flipkart, amazon } = val;
+    let object = { title, url, content, key_feature, pros, cons, flipkart, amazon };
     subheading.push(object);
 
     let component = `<div class="subheading-tab-container" id="modal_sub_tab_container_${modal_sub_count}">
@@ -351,8 +351,8 @@ const advanceCreateSubheading = (array) => {
       title
     )} class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
                       <button type="button" data-heading=${replace(
-                        title
-                      )} id=subheading_edit-btn_${modal_sub_count} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
+      title
+    )} id=subheading_edit-btn_${modal_sub_count} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -381,8 +381,8 @@ const advanceCreateQuestions = (array) => {
       question
     )}  onclick="modaldeletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
                       <button  data-heading=${replace(
-                        question
-                      )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
+      question
+    )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
@@ -479,6 +479,7 @@ const editBlog = async (value) => {
     urls,
     createdAt,
     username,
+    conclusion
   } = data[0];
   questions = data[0].questions;
   subheading = data[0].subheading;
@@ -488,6 +489,7 @@ const editBlog = async (value) => {
   $("#modal_description_input").val(description);
   $("#modal_meta_description_input").val(meta_description);
   $("#modal_category").val(category);
+  $("#modal_conclusion").val(conclusion);
   blog_name = heading;
   advanceCreateTags(tags);
   advanceCreateSubheading(subheading);
@@ -566,16 +568,14 @@ const populateData = () => {
                 <div >
                 <h5>${value.heading}</h5>
                   <div>
-                  <span style="color: orange;" data-heading="${
-                    value.heading
-                  }" onclick=editBlog(this.getAttribute(["data-heading"])) data-toggle="modal" data-target="#exampleModalLong">edit</span>
+                  <span style="color: orange;" data-heading="${value.heading
+          }" onclick=editBlog(this.getAttribute(["data-heading"])) data-toggle="modal" data-target="#exampleModalLong">edit</span>
                  
-                  <span  style="color: red;" data-heading="${
-                    value.heading
-                  }" onclick=deleteBlog(this.getAttribute(["data-heading"]),${index}) >Delete</span>
+                  <span  style="color: red;" data-heading="${value.heading
+          }" onclick=deleteBlog(this.getAttribute(["data-heading"]),${index}) >Delete</span>
                   <span><a href="./about.html?${replace(
-                    value.heading
-                  )}">View</a></span>
+            value.heading
+          )}">View</a></span>
                 </div>
                 </div>
               </div>
@@ -755,8 +755,8 @@ const modalsubheadingSave = () => {
                                       margin: px 0;
                                     ">
                       <button type="button" data-heading=${replace(
-                        title
-                      )}  class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
+    title
+  )}  class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
                       <button type="button" id=subheading_edit-btn_${modal_sub_count} data-heading=${replace(
     title
   )} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
@@ -786,8 +786,8 @@ const questionSave = () => {
                                       margin: px 0;
                                     ">
                       <button type="button" data-heading=${replace(
-                        question
-                      )} id="button_quest_${modal_quest_count}" onclick="deletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
+    question
+  )} id="button_quest_${modal_quest_count}" onclick="deletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
                       <button type="button" id="button_quest_edit_${modal_quest_count}" data-heading=${replace(
     question
   )}  type="button" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))" data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
@@ -820,8 +820,8 @@ const modalquestionSave = () => {
     question
   )}  onclick="modaldeletequestTab(${modal_quest_count},this.getAttribute('data-heading'))" class="btn btn-primary btn-sm">delete</button>
                       <button type="button" data-heading=${replace(
-                        question
-                      )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))"  data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
+    question
+  )}  type="button" id="button_quest_edit_${modal_quest_count}" onclick="questModal(${modal_quest_count},this.getAttribute('data-heading'))"  data-toggle="modal" data-target="#questModal"  class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
