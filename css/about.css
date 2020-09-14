@@ -377,6 +377,47 @@ nav .rows div {
   font-weight: bold;
 }
 
+.buy-button {
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.buy-button img {
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
+  width: auto;
+  height: 45px;
+}
+
+.buy-button div {
+  -webkit-box-flex: 7;
+      -ms-flex: 7;
+          flex: 7;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: black;
+  border-radius: 15px;
+  font-weight: bolder;
+  color: orange;
+}
+
 @media screen and (max-width: 900px) {
   img {
     width: 100%;
@@ -399,6 +440,13 @@ nav .rows div {
   #quotes {
     width: 80%;
     margin: 0 10%;
+  }
+  .buy-button {
+    width: 60%;
+    margin: 10px 20%;
+  }
+  .buy-button img {
+    height: 45px;
   }
 }
 /*# sourceMappingURL=about.css.map */

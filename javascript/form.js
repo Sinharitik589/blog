@@ -1,30 +1,29 @@
 var heading,
+  conclusion,
   description,
   imageUrl,
   blog_name,
   index_value,
   meta_description,
-  category;
-var tags = [];
-
-var questions = [];
-
-var subheading = [];
-
-var urls = [];
-var tab_count = 0;
-var url_count = 0;
-var modal_tab_count = 0;
-var modal_url_count = 0;
-var sub_count = 0;
-var quest_count = 0;
-var modal_quest_count = 0;
-var modal_sub_count = 0;
-var questModalno, subModalno;
-var tab_active = 0;
-var prompted;
-var change_attribute;
-var featured = [];
+  category,
+  urls = [],
+  tab_count = 0,
+  url_count = 0,
+  modal_tab_count = 0,
+  modal_url_count = 0,
+  sub_count = 0,
+  quest_count = 0,
+  modal_quest_count = 0,
+  modal_sub_count = 0,
+  questModalno,
+  subModalno,
+  tab_active = 0,
+  prompted,
+  change_attribute,
+  featured = [],
+  tags = [],
+  questions = [],
+  subheading = [];
 
 refreshVars = () => {
   questions = [];
@@ -35,23 +34,15 @@ refreshVars = () => {
 
 const cleanForm = () => {
   $("#skills_set").empty();
-  $("#skills_set").append(`<input
-                    class="form-control"
-                    style="display: none;"
-                    onkeyup="tagInput(event)"
-                    id="add_skill"
-                  />`);
+  $("#skills_set").append(
+    `<input class="form-control" style="display: none;" onkeyup="tagInput(event)" id="add_skill" />`
+  );
   $("#subheading_tabs").empty();
-
   $("#subheading_quest").empty();
-
   $("#url_set").empty();
-  $("#url_set").append(`<input
-                    class="form-control"
-                    style="display: none;"
-                    id="add_url"
-                    onkeyup="urlInputHandle(event)"
-                  />`);
+  $("#url_set").append(
+    `<input class="form-control"style="display: none; id="add_url onkeyup="urlInputHandle(event)" />`
+  );
 };
 const clearThings = () => {
   refreshVars();
@@ -117,7 +108,7 @@ const featuredSelection = (event, data) => {
       document.getElementById(event.target.id).style.color = "black";
     } else {
       featured.push(data);
-      console.log(event.target.id);
+
       document.getElementById(event.target.id).style.color = "blue";
     }
   } else {
@@ -173,7 +164,6 @@ const modalshowBut = () => {
   $("#modal_add_skill").show();
 };
 const modalshowUrl = () => {
-  console.log("working");
   $("#modal_add_url").show();
 };
 const modaleditPanel = () => {
@@ -184,7 +174,6 @@ const modalquesteditPanel = () => {
 };
 
 const replace = (str) => {
-  console.log(replace);
   let array = str;
   for (i = 0; i < str.length; i++) {
     array = array.replace(" ", "_");
@@ -192,7 +181,6 @@ const replace = (str) => {
   return array;
 };
 const revreplace = (str) => {
-  console.log(str);
   let array = str;
   for (i = 0; i < str.length; i++) {
     array = array.replace("_", " ");
@@ -207,31 +195,30 @@ const questModal = (value, datas) => {
   change_attribute = value;
   if (index >= 0) {
     questModalno = index;
-    console.log(index, "index");
+
     $("#modals_quest").val(questions[index].question);
     $("#modals_ans").val(questions[index].answer);
   }
 };
+
+//function for filling modal in new form
 const subModal = (datas, value) => {
   change_attribute = value;
   let data = revreplace(datas);
-
   let index = subheading.findIndex((val) => {
-    console.log(val.title, data);
     return val.title == data;
   });
 
-  console.log(index);
   if (index >= 0) {
     subModalno = index;
-    console.log(datas);
-    console.log(subheading[index]);
     $("#modals_title").val(subheading[index].title);
     $("#modals_url").val(subheading[index].url);
     $("#modals_description").val(subheading[index].content);
     $("#modals_key_features").val(subheading[index].key_feature);
     $("#modals_cons").val(subheading[index].cons);
     $("#modals_pros").val(subheading[index].pros);
+    $("#modals_flipkart").val(subheading[index].flipkart);
+    $("#modals_amazon").val(subheading[index].amazon);
   }
 };
 
@@ -247,7 +234,6 @@ const modaldeletequestTab = (value, datas) => {
   }
 };
 const modaldeletesubTab = (value, datas) => {
-  console.log(subheading);
   let data = revreplace(datas);
 
   let index = subheading.findIndex((val) => {
@@ -257,8 +243,6 @@ const modaldeletesubTab = (value, datas) => {
     subheading.splice(index, 1);
     $(`#modal_sub_tab_container_${value}`).remove();
   }
-
-  console.log(subheading);
 };
 
 const deletequestTab = (value, datas) => {
@@ -268,7 +252,7 @@ const deletequestTab = (value, datas) => {
   });
   if (index >= 0) {
     questions.splice(index, 1);
-    console.log(value);
+
     $(`#quest_tab_container_${value}`).remove();
   }
 };
@@ -288,7 +272,6 @@ const deletesubTab = (value, datas) => {
 const modaldeleteUrls = (value, data) => {
   let index = urls.map((val, index) => {
     if (val.keyword == data) {
-      console.log(index);
       return index;
     } else {
       return null;
@@ -299,13 +282,11 @@ const modaldeleteUrls = (value, data) => {
   }
 
   $(`#modal_app_url_${value}`).remove();
-  console.log(urls);
 };
 
 const modaldeleteTags = (value, data) => {
   let index = tags.map((val, index) => {
     if (val.keyword == data) {
-      console.log(index);
       return index;
     } else {
       return null;
@@ -454,7 +435,8 @@ const putBlog = async () => {
   imageUrl = $("#modal_url_input").val();
   description = $("#modal_description_input").val();
   meta_description = $("#modal_meta_description_input").val();
-  console.log(subheading);
+  conclusion = $("#modal_conclusion").val();
+
   const res = await axios.put(
     `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?blog=${blog_name}`,
     {
@@ -467,6 +449,7 @@ const putBlog = async () => {
       tags,
       questions,
       urls,
+      conclusion,
     },
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -479,6 +462,8 @@ const putBlog = async () => {
     populateData();
   }
 };
+
+// For creating the edit panel
 const editBlog = async (value) => {
   const res = await axios.get(
     `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${value}`
@@ -497,8 +482,6 @@ const editBlog = async (value) => {
   } = data[0];
   questions = data[0].questions;
   subheading = data[0].subheading;
-  console.log(data[0].subheading);
-  console.log(subheading);
 
   $("#modal_heading_input").val(heading);
   $("#modal_url_input").val(imageUrl);
@@ -525,13 +508,12 @@ const deleteBlogConfirm = () => {
     .then((res) => {
       if (res.status == 200) {
         let index = featured.findIndex((val) => {
-          console.log(val, blog_name);
           return val == blog_name;
         });
-        console.log(index, featured, blog_name);
+
         if (index >= 0) {
           featured.splice(index, 1);
-          console.log(featured);
+
           axios
             .post(
               "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/featured",
@@ -561,6 +543,8 @@ const deleteBlogConfirm = () => {
       }
     });
 };
+
+//Function for populating data when page loads up initially
 const populateData = () => {
   $("#blog_tabs").empty();
   $("#featured-tab").empty();
@@ -573,7 +557,6 @@ const populateData = () => {
       const data = res.data.arr;
       featured = res.data.featured;
 
-      console.log(data, res.data);
       data.map((value, index) => {
         let element = `<div class="col-md-6 col-sm-12" id=edit_blog_tab_${index}>
               <div class="edit-blog-tab" >
@@ -618,7 +601,7 @@ const populateData = () => {
         } else {
           $("#featured-tab").append(`<div
              
-              class="featured-tab"
+             class="featured-tab"
               data-heading="${value.heading}"
               onclick=featuredSelection(event,this.getAttribute(["data-heading"]))
               id=featured_tab${index}
@@ -636,28 +619,12 @@ const populateData = () => {
       }
     });
 };
+
 $(document).ready(populateData);
-
-const deleteTags = (value, data) => {
-  let index = tags.map((val, index) => {
-    if (val.keyword == data) {
-      console.log(index);
-      return index;
-    } else {
-      return null;
-    }
-  });
-  if (index != null) {
-    tags.splice(index, 1);
-  }
-
-  $(`#app_tag_${value}`).remove();
-};
 
 const deleteUrls = (value, data) => {
   let index = urls.map((val, index) => {
     if (val.keyword == data) {
-      console.log(index);
       return index;
     } else {
       return null;
@@ -668,7 +635,6 @@ const deleteUrls = (value, data) => {
   }
 
   $(`#app_url_${value}`).remove();
-  console.log(urls);
 };
 
 const questModalSave = () => {
@@ -687,8 +653,6 @@ const questModalSave = () => {
   $(`#modal_quest_tab_heading_${change_attribute}`).html(
     $("#modals_quest").val()
   );
-
-  console.log(questions[questModalno], "mm", change_attribute);
 };
 
 const subModalSave = () => {
@@ -706,10 +670,13 @@ const subModalSave = () => {
   subheading[subModalno].key_feature = $("#modals_key_features").val();
   subheading[subModalno].cons = $("#modals_cons").val();
   subheading[subModalno].pros = $("#modals_pros").val();
+  subheading[subModalno].flipkart = $("#modals_flipkart").val();
+  subheading[subModalno].amazon = $("#modals_amazon").val();
   $(`#sub_tab_${change_attribute}`).html($("#modals_title").val());
   $(`#modal_sub_tab_${change_attribute}`).html($("#modals_title").val());
 };
 
+// for saving new subheading
 const subheadingSave = () => {
   let title = $("#subheading_title").val();
   let url = $("#subheading_url").val();
@@ -718,7 +685,18 @@ const subheadingSave = () => {
   let key_feature = $("#subheading_key_features").val();
   let pros = $("#subheading_pros").val();
   let cons = $("#subheading_cons").val();
-  let object = { title, url, content, key_feature, pros, cons };
+  let flipkart = $("#subheading_flipkart").val();
+  let amazon = $("#subheading_amazon").val();
+  let object = {
+    title,
+    url,
+    content,
+    key_feature,
+    pros,
+    cons,
+    amazon,
+    flipkart,
+  };
   subheading.push(object);
 
   let component = `<div class="subheading-tab-container" id="sub_tab_container_${sub_count}">
@@ -747,6 +725,7 @@ const subheadingCancel = () => {
   $("#edit_panel").hide();
 };
 
+// function for editing subheading in new form as well as the edited panel
 const modalsubheadingSave = () => {
   let title = $("#modal_subheading_title").val();
   let url = $("#modal_subheading_url").val();
@@ -754,7 +733,18 @@ const modalsubheadingSave = () => {
   let key_feature = $("#modal_subheading_key_features").val();
   let cons = $("#modal_subheading_cons").val();
   let pros = $("#modal_subheading_pros").val();
-  let object = { title, url, content, key_feature, pros, cons };
+  let flipkart = $("#modal_subheading_flipkart").val();
+  let amazon = $("#modal_subheading_amazon").val();
+  let object = {
+    title,
+    url,
+    content,
+    key_feature,
+    pros,
+    cons,
+    flipkart,
+    amazon,
+  };
   subheading.push(object);
 
   let component = `<div class="subheading-tab-container" id="modal_sub_tab_container_${modal_sub_count}">
@@ -845,56 +835,6 @@ const modalquestionCancel = () => {
   $("#modal_quest_edit_panel").hide();
 };
 
-const tagInput = (event) => {
-  if (event.keyCode == 13) {
-    let array = event.target.value.split(",");
-    array.map((val, index) => {
-      let element = `  <div class="application-tag-container" id="app_tag_${index}">
-          <div class="application-tags">${val}
-          <span
-              
-              style="margin-left:4px;cursor:pointer"
-              data-value=${val}
-              onClick="deleteTags(${index},this.getAttribute('data-value'))"
-            >
-              &times;
-            </span></div>
-        </div>`;
-
-      let component = document.getElementById("skills_set");
-      component.insertAdjacentHTML("beforeend", element);
-      tags.push(val);
-    });
-
-    $("#add_skill").hide();
-  }
-};
-const modaltagInput = (event) => {
-  if (event.keyCode == 13) {
-    let array = event.target.value.split(",");
-    array.map((val) => {
-      let element = `  <div class="application-tag-container" id="modal_app_tag_${modal_tab_count}">
-          <div class="application-tags">${val}
-          <span
-              
-              style="margin-left:4px;cursor:pointer"
-              data-value=${val}
-              onClick="modaldeleteTags(${modal_tab_count},this.getAttribute('data-value'))"
-            >
-              &times;
-            </span></div>
-        </div>`;
-
-      let component = document.getElementById("modal_skills_set");
-      component.insertAdjacentHTML("beforeend", element);
-      tags.push(val);
-      modal_tab_count++;
-    });
-
-    $("#modal_add_skill").hide();
-  }
-};
-
 const urlInputHandle = (event) => {
   if (event.keyCode == 13) {
   }
@@ -969,6 +909,7 @@ const submitInfo = async () => {
   meta_description = $("#meta_description_input").val();
   heading = $("#heading_input").val();
   imageUrl = $("#url_input").val();
+  conclusion = $("#conclusion").val();
   console.log(
     description,
     "next",
@@ -996,6 +937,7 @@ const submitInfo = async () => {
       tags,
       questions,
       urls,
+      conclusion,
     },
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -1017,4 +959,71 @@ const submitInfo = async () => {
 const logout = () => {
   localStorage.removeItem("token");
   window.location.href = "./admin.html";
+};
+
+//Depreceated tags input and delete function
+
+const deleteTags = (value, data) => {
+  let index = tags.map((val, index) => {
+    if (val.keyword == data) {
+      return index;
+    } else {
+      return null;
+    }
+  });
+  if (index != null) {
+    tags.splice(index, 1);
+  }
+
+  $(`#app_tag_${value}`).remove();
+};
+
+const tagInput = (event) => {
+  if (event.keyCode == 13) {
+    let array = event.target.value.split(",");
+    array.map((val, index) => {
+      let element = `  <div class="application-tag-container" id="app_tag_${index}">
+          <div class="application-tags">${val}
+          <span
+              
+              style="margin-left:4px;cursor:pointer"
+              data-value=${val}
+              onClick="deleteTags(${index},this.getAttribute('data-value'))"
+            >
+              &times;
+            </span></div>
+        </div>`;
+
+      let component = document.getElementById("skills_set");
+      component.insertAdjacentHTML("beforeend", element);
+      tags.push(val);
+    });
+
+    $("#add_skill").hide();
+  }
+};
+const modaltagInput = (event) => {
+  if (event.keyCode == 13) {
+    let array = event.target.value.split(",");
+    array.map((val) => {
+      let element = `  <div class="application-tag-container" id="modal_app_tag_${modal_tab_count}">
+          <div class="application-tags">${val}
+          <span
+              
+              style="margin-left:4px;cursor:pointer"
+              data-value=${val}
+              onClick="modaldeleteTags(${modal_tab_count},this.getAttribute('data-value'))"
+            >
+              &times;
+            </span></div>
+        </div>`;
+
+      let component = document.getElementById("modal_skills_set");
+      component.insertAdjacentHTML("beforeend", element);
+      tags.push(val);
+      modal_tab_count++;
+    });
+
+    $("#modal_add_skill").hide();
+  }
 };

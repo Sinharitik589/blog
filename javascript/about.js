@@ -68,6 +68,7 @@ const handleUrl = () => {
         description,
         subheading,
         tags,
+        conclusion,
         questions,
         urls,
         createdAt,
@@ -173,6 +174,14 @@ const handleUrl = () => {
           key.appendChild(array);
           arr.appendChild(key);
         }
+        if (value.flipkart.length > 0 && value.amazon.length > 0) {
+          let element = document.createElement("div");
+          element.className = "row ";
+          let child =
+            `<a href=${value.amazon} class="col-md-4 buy-button"><img  style="margin:0;padding:0" src="https://i.pinimg.com/originals/08/5f/d8/085fd8f7819dee3b716da73d3b2de61c.jpg"/><div >Buy on amazon</div></a><a  class="col-md-4 offset-md-4 buy-button" href=${value.flipkart}><img  style="margin:0;padding:0" src="https://latestnews.fresherslive.com/images/articles/ians/origin/2020/07/14/walmart-led-investors-pump-in-12-bn-in-flipkart-group-5f0da8994d322-1594730649.jpg"/><div style="background-color:#154db3;color:white" >Buy on flipkart</div></a>`;
+          element.insertAdjacentHTML("beforeend", child);
+          arr.appendChild(element);
+        }
         /*  if (
           index == "0" ||
           index == subheading.length - 1 ||
@@ -181,6 +190,14 @@ const handleUrl = () => {
           main.insertAdjacentHTML("beforeend", ad);
         } */
       });
+      if (conclusion.length > 0) {
+        let concl = document.createElement("div");
+        concl.className = "subheading";
+        concl.innerText = conclusion;
+        let head = document.createElement("h3");
+        head.innerText = "Conclusion";
+        main.appendChild(concl);
+      }
 
       /*   document.getElementById("fb-share-button").dataset["href"] =
         window.location.href; */
@@ -195,7 +212,7 @@ const handleUrl = () => {
       });
  */
       let qcomponent = document.getElementById("quest");
-      const openAnswer = (id) => {};
+      const openAnswer = (id) => { };
       questions.map((value, index) => {
         let element = `<div class="quest-container"><div id="question_${index}">${value.question}<span id=question_button_${index}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
