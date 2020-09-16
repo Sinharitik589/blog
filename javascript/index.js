@@ -79,7 +79,7 @@ const CallApi = () => {
   <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
 </svg> ${value.username}</span></div>
         
-          <p>${value.description}</p>
+          <p>${value.meta_description}</p>
          </div>
          <div class=" image-container"><img  style="padding:0" src="${value.imageUrl
           }"/></div>
@@ -156,7 +156,7 @@ const CallApi = () => {
                       ${value.heading}
                     </div>
                     <p class="carousel-des">
-                       ${value.description}
+                       ${value.meta_description}
                     </p>
                   </div>
                 </div>

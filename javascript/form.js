@@ -177,6 +177,9 @@ const replace = (str) => {
   let array = str;
   for (i = 0; i < str.length; i++) {
     array = array.replace(" ", "_");
+    array = array.replace("<", "&lt");
+    array = array.replace(">", "&gt");
+
   }
   return array;
 };
@@ -184,6 +187,8 @@ const revreplace = (str) => {
   let array = str;
   for (i = 0; i < str.length; i++) {
     array = array.replace("_", " ");
+    array = array.replace("&lt", "<");
+    array = array.replace("&gt", ">");
   }
   return array;
 };
@@ -204,6 +209,7 @@ const questModal = (value, datas) => {
 //function for filling modal in new form
 const subModal = (datas, value) => {
   change_attribute = value;
+  console.log(datas)
   let data = revreplace(datas);
   let index = subheading.findIndex((val) => {
     return val.title == data;
@@ -347,12 +353,8 @@ const advanceCreateSubheading = (array) => {
                                       flex-direction: row-reverse;
                                       margin: px 0;
                                     ">
-                      <button id=subheading_delete-btn_${modal_sub_count} type="button" data-heading=${replace(
-      title
-    )} class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
-                      <button type="button" data-heading=${replace(
-      title
-    )} id=subheading_edit-btn_${modal_sub_count} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
+                      <button id=subheading_delete-btn_${modal_sub_count} type="button" data-heading=${replace(title)}  class="btn btn-primary btn-sm" onclick="modaldeletesubTab(${modal_sub_count},this.getAttribute('data-heading'))">delete</button>
+                      <button type="button" data-heading=${replace(title)}   id=subheading_edit-btn_${modal_sub_count} onclick="subModal(this.getAttribute('data-heading'),${modal_sub_count})"  data-toggle="modal" data-target="#subModal" class="btn btn-secondary btn-sm">edit</button>
                 
                     </div>
                 </div>`;
