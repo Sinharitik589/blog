@@ -47,6 +47,8 @@ const renderList = (arr) => {
   });
   return un;
 };
+
+
 const handleUrl = () => {
   let rand = Math.floor(Math.random() * quotes.length);
   $("#quotes").html(quotes[rand]);
@@ -116,19 +118,20 @@ const handleUrl = () => {
 
       let des = document.createElement("p");
       des.className = "subheading";
-      let description_new = description.replace("\n", "<br/>");
+
+      let description_new = description.split("\n").join("<br/>");
       des.innerHTML = description_new;
       main.appendChild(des);
 
       subheading.map((value, index) => {
         let { title, content } = value;
-        let ad = "<hr/><div class='small-ad'>Space for ad</div><hr/>";
+        /*       let ad = "<hr/><div class='small-ad'>Space for ad</div><hr/>"; */
         let content_new = content.split("\n").join("<br/>");
         let content_final = replaceContentUrl(content_new);
         let arr = document.createElement("div");
         arr.className = "subheading";
         let head = document.createElement("h3");
-        head.innerText = title;
+        head.innerHTML = title;
         arr.appendChild(head);
         let img = document.createElement("div");
         img.className = "subheading-image";
