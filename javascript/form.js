@@ -402,6 +402,7 @@ const advanceCreateUrls = (array) => {
   $("#modal_url_set").append(
     ' <input class="form-control" style="display:none" id="modal_add_url" onkeyup="modalurlInputHandle(event)" />'
   );
+  console.log(array);
 
   array.map((value) => {
     const { keyword, url } = value;
@@ -411,7 +412,7 @@ const advanceCreateUrls = (array) => {
     });
     let element = ` 
        <div  class="application-tag-container" id="modal_app_url_${modal_url_count}" >
-          <div class="application-tags" style="background-color: #dfe9fb;"><a href="${arr[1]}" >${arr[0]}</a><span
+          <div class="application-tags" style="background-color: #dfe9fb;"><a href="${url}" >${keyword}</a><span
 
               style="margin-left:4px;cursor:pointer;color:blue"
               data-value=${keyword}
@@ -843,7 +844,7 @@ const urlInputHandle = (event) => {
   if (event.keyCode == 13) {
     let object = event.target.value.split(",");
     object.map((value, index) => {
-      let arr = value.split("-");
+      let arr = value.split("~");
       let element = ` 
        <div  class="application-tag-container" id="app_url_${index}" >
           <div class="application-tags" style="background-color: #dfe9fb;"><a href="${arr[1]}" >${arr[0]}</a><span
@@ -875,7 +876,7 @@ const modalurlInputHandle = (event) => {
   if (event.keyCode == 13) {
     let object = event.target.value.split(",");
     object.map((value) => {
-      let arr = value.split("-");
+      let arr = value.split("~");
       let element = ` 
        <div  class="application-tag-container" id="modal_app_url_${modal_url_count}" >
           <div class="application-tags" style="background-color: #dfe9fb;"><a href="${arr[1]}" >${arr[0]}</a><span
