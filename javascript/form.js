@@ -913,21 +913,7 @@ const submitInfo = async () => {
   heading = $("#heading_input").val();
   imageUrl = $("#url_input").val();
   conclusion = $("#conclusion").val();
-  console.log(
-    description,
-    "next",
-    heading,
-    "next",
-    imageUrl,
-    "next",
-    urls,
-    "next",
-    tags,
-    "next",
-    subheading,
-    "next",
-    questions
-  );
+
 
   const res = await axios.post(
     "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/input",
@@ -936,6 +922,7 @@ const submitInfo = async () => {
       heading,
       imageUrl,
       description,
+      meta_description,
       subheading,
       tags,
       questions,

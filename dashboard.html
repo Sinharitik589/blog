@@ -1,1098 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin</title>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="upgrade-insecure-requests"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./css/featured.css" />
-    <!-- JS, Popper.js, and jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./javascript/form.js"></script>
-    <link rel="stylesheet" href="./css/form.css" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script></script>
-  </head>
-  <body>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (localStorage.getItem("token") == null) {
-          window.location.href = "./admin.html";
-        }
-      });
-    </script>
-    <nav>
-      <div class="rows">
-        <div style="flex: 3; font-size: larger">DASHBOARD</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./css/featured.css" />
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <script src="./javascript/form.js"></script>
+  <link rel="stylesheet" href="./css/form.css" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-        <div style="display: flex; flex: 9; flex-direction: row-reverse">
-          <span style="color: blue" onclick="logout()"> Logout </span>
-        </div>
+  <script></script>
+</head>
+
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("token") == null) {
+        window.location.href = "./admin.html";
+      }
+    });
+  </script>
+  <nav>
+    <div class="rows">
+      <div style="flex: 3; font-size: larger">DASHBOARD</div>
+
+      <div style="display: flex; flex: 9; flex-direction: row-reverse">
+        <span style="color: blue" onclick="logout()"> Logout </span>
       </div>
-    </nav>
-    <div class="row">
-      <div class="col-md-2 col-sm-12 side_nav">
-        <span
-          id="button_home0"
-          data-dom="0"
-          style="background-color: #242849; color: white"
-          onclick="show(this.getAttribute('data-dom'))"
-        >
-          Blogs
-        </span>
-        <span
-          id="button_home1"
-          data-dom="1"
-          onclick="show(this.getAttribute('data-dom'))"
-        >
-          Add new
-        </span>
-        <span
-          id="button_home2"
-          data-dom="2"
-          onclick="show(this.getAttribute('data-dom'))"
-        >
-          Featured
-        </span>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-md-2 col-sm-12 side_nav">
+      <span id="button_home0" data-dom="0" style="background-color: #242849; color: white"
+        onclick="show(this.getAttribute('data-dom'))">
+        Blogs
+      </span>
+      <span id="button_home1" data-dom="1" onclick="show(this.getAttribute('data-dom'))">
+        Add new
+      </span>
+      <span id="button_home2" data-dom="2" onclick="show(this.getAttribute('data-dom'))">
+        Featured
+      </span>
+    </div>
+
+    <div class="col-md-10 col-sm-12 container newclass">
+      <div id="home0">
+        <div class="row" id="blog_tabs"></div>
       </div>
-
-      <div class="col-md-10 col-sm-12 container newclass">
-        <div id="home0">
-          <div class="row" id="blog_tabs"></div>
+      <div style="display: none" id="home1">
+        <div class="form-group">
+          <ul>
+            Tips for using html tags:-
+            <li>
+              For highlighting any sentence use:-<code>&ltmark&gt________&lt/mark&gt</code>
+            </li>
+            <li>
+              For underlining any sentence use:-<code>&ltu&gt________&lt/u&gt</code>
+            </li>
+            <li>
+              For making any sentence bold use:-<code>&ltb&gt________&lt/b&gt</code>
+            </li>
+            <li>
+              For imparting particular color use:-<code>&ltspan style="color:your desired
+                  color"&gt________&lt/span&gt</code>
+            </li>
+          </ul>
         </div>
-        <div style="display: none" id="home1">
-          <div class="form-group">
-            <ul>
-              Tips for using html tags:-
-              <li>
-                For highlighting any sentence use:-<code
-                  >&ltmark&gt________&lt/mark&gt</code
-                >
-              </li>
-              <li>
-                For underlining any sentence use:-<code
-                  >&ltu&gt________&lt/u&gt</code
-                >
-              </li>
-              <li>
-                For making any sentence bold use:-<code
-                  >&ltb&gt________&lt/b&gt</code
-                >
-              </li>
-              <li>
-                For imparting particular color use:-<code
-                  >&ltspan style="color:your desired
-                  color"&gt________&lt/span&gt</code
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="form-group">
-            <label for="category">Category</label>
-            <select class="form-control" id="category">
-              <option value="gadgets">Gadgets</option>
-              <option value="colleges">Colleges</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="heading_input">Heading</label>
-            <input
-              type="email"
-              class="form-control"
-              id="heading_input"
-              placeholder="name@example.com"
-            />
-          </div>
-          <div class="form-group">
-            <label for="url_input">Image url</label>
-            <input
-              type="url"
-              class="form-control"
-              id="url_input"
-              placeholder="name@example.com"
-            />
-          </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="category">
+            <option value="gadgets">Gadgets</option>
+            <option value="colleges">Colleges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="heading_input">Heading</label>
+          <input type="email" class="form-control" id="heading_input" placeholder="name@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="url_input">Image url</label>
+          <input type="url" class="form-control" id="url_input" placeholder="name@example.com" />
+        </div>
 
-          <div class="form-group">
-            <label for="description_input">Description</label>
-            <textarea
-              id="description_input"
-              class="form-control"
-              rows="4"
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label for="meta_description_input">Meta Description</label>
-            <textarea
-              id="meta_description_input"
-              class="form-control"
-              rows="4"
-            ></textarea>
-          </div>
-          <hr />
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-1 col-sm-12">
-                <h3
-                  style="color: #464646; font-weight: bold; text-align: center"
-                  }
-                >
-                  Tags
-                </h3>
+        <div class="form-group">
+          <label for="description_input">Description</label>
+          <textarea id="description_input" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="meta_description_input">Meta Description</label>
+          <textarea id="meta_description_input" class="form-control" rows="4"></textarea>
+        </div>
+        <hr />
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-1 col-sm-12">
+              <h3 style="color: #464646; font-weight: bold; text-align: center" }>
+                Tags
+              </h3>
+            </div>
+            <div class="col-md-9 col-sm-12">
+              <div class="skills" id="skills_set">
+                <input class="form-control" style="display: none" onkeyup="tagInput(event)" id="add_skill" />
               </div>
-              <div class="col-md-9 col-sm-12">
-                <div class="skills" id="skills_set">
-                  <input
-                    class="form-control"
-                    style="display: none"
-                    onkeyup="tagInput(event)"
-                    id="add_skill"
-                  />
-                </div>
-              </div>
-              <div
-                class="col-md-2 col-sm-12"
-                style="
+            </div>
+            <div class="col-md-2 col-sm-12" style="
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                "
-              >
-                <button
-                  onclick="showBut()"
-                  class="application-button-container"
-                >
-                  + Add
-                </button>
-              </div>
+                ">
+              <button onclick="showBut()" class="application-button-container">
+                + Add
+              </button>
             </div>
           </div>
-          <hr />
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-3 col-sm-12">
-                <h3
-                  style="color: #464646; font-weight: bold"
-                  class="label_heading"
-                >
-                  Subheading
-                </h3>
-              </div>
-              <div class="col-md-7 col-sm-12" id="subheading_tabs"></div>
-              <div class="col-md-2 col-sm-12 label-button">
-                <button
-                  onclick="editPanel()"
-                  class="application-button-container"
-                >
-                  + Add
-                </button>
-              </div>
-              <div class="col-md-12 col-sm-12">
-                <div class="edit-panel" id="edit_panel">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <label class="application-label">Title</label>
-                      <input class="form-control" id="subheading_title" />
-                    </div>
+        </div>
+        <hr />
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-3 col-sm-12">
+              <h3 style="color: #464646; font-weight: bold" class="label_heading">
+                Subheading
+              </h3>
+            </div>
+            <div class="col-md-7 col-sm-12" id="subheading_tabs"></div>
+            <div class="col-md-2 col-sm-12 label-button">
+              <button onclick="editPanel()" class="application-button-container">
+                + Add
+              </button>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="edit-panel" id="edit_panel">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <label class="application-label">Title</label>
+                    <input class="form-control" id="subheading_title" />
+                  </div>
 
-                    <div class="col-md-6 col-sm-12">
-                      <label class="application-label">Url</label>
-                      <input class="form-control" id="subheading_url" />
-                    </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label class="application-label">Url</label>
+                    <input class="form-control" id="subheading_url" />
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label">Description</label>
-                      <textarea
-                        id="subheading_description"
-                        class="form-control"
-                        rows="6"
-                      ></textarea>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Description</label>
+                    <textarea id="subheading_description" class="form-control" rows="6"></textarea>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label"
-                        >Key Features(seperated by comma)</label
-                      >
-                      <textarea
-                        id="subheading_key_features"
-                        class="form-control"
-                        rows="3"
-                      ></textarea>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Key Features(seperated by comma)</label>
+                    <textarea id="subheading_key_features" class="form-control" rows="3"></textarea>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label"
-                        >Pros(seperated by comma)</label
-                      >
-                      <textarea
-                        id="subheading_pros"
-                        class="form-control"
-                        rows="3"
-                      ></textarea>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Pros(seperated by comma)</label>
+                    <textarea id="subheading_pros" class="form-control" rows="3"></textarea>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label"
-                        >Cons(seperated by comma)</label
-                      >
-                      <textarea
-                        id="subheading_cons"
-                        class="form-control"
-                        rows="3"
-                      ></textarea>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Cons(seperated by comma)</label>
+                    <textarea id="subheading_cons" class="form-control" rows="3"></textarea>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                      <label class="application-label">Flipkart Link</label>
-                      <input class="form-control" id="subheading_flipkart" />
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <label class="application-label">Flipkart Link</label>
+                    <input class="form-control" id="subheading_flipkart" />
+                  </div>
 
-                    <div class="col-md-6 col-sm-12">
-                      <label class="application-label">Amazon Link</label>
-                      <input class="form-control" id="subheading_amazon" />
-                    </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label class="application-label">Amazon Link</label>
+                    <input class="form-control" id="subheading_amazon" />
                   </div>
-                  <div
-                    style="
+                </div>
+                <div style="
                       display: flex;
                       flex-direction: row-reverse;
                       margin: 15px 0;
-                    "
-                  >
-                    <button
-                      style="background-color: #365679; color: white"
-                      onclick="subheadingSave()"
-                      class="panel-button"
-                    >
-                      Save
-                    </button>
-                    <button class="panel-button" onclick="subheadingCancel()">
-                      Cancel
-                    </button>
-                  </div>
+                    ">
+                  <button style="background-color: #365679; color: white" onclick="subheadingSave()"
+                    class="panel-button">
+                    Save
+                  </button>
+                  <button class="panel-button" onclick="subheadingCancel()">
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <hr />
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-3 col-sm-12">
-                <h3
-                  style="color: #464646; font-weight: bold"
-                  class="label_heading"
-                >
-                  Question
-                </h3>
-              </div>
-              <div class="col-md-7 col-sm-12" id="subheading_quest"></div>
-              <div class="col-md-2 col-sm-12 label-button">
-                <button
-                  onclick="questeditPanel()"
-                  class="application-button-container"
-                >
-                  + Add
-                </button>
-              </div>
-              <div class="col-md-12 col-sm-12">
-                <div class="edit-panel" id="quest_edit_panel">
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label">Question</label>
-                      <input class="form-control" id="quest" />
-                    </div>
+        </div>
+        <hr />
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-3 col-sm-12">
+              <h3 style="color: #464646; font-weight: bold" class="label_heading">
+                Question
+              </h3>
+            </div>
+            <div class="col-md-7 col-sm-12" id="subheading_quest"></div>
+            <div class="col-md-2 col-sm-12 label-button">
+              <button onclick="questeditPanel()" class="application-button-container">
+                + Add
+              </button>
+            </div>
+            <div class="col-md-12 col-sm-12">
+              <div class="edit-panel" id="quest_edit_panel">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Question</label>
+                    <input class="form-control" id="quest" />
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                      <label class="application-label">Answer</label>
-                      <textarea
-                        id="ans"
-                        class="form-control"
-                        rows="3"
-                      ></textarea>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <label class="application-label">Answer</label>
+                    <textarea id="ans" class="form-control" rows="3"></textarea>
                   </div>
+                </div>
 
-                  <div
-                    style="
+                <div style="
                       display: flex;
                       flex-direction: row-reverse;
                       margin: 15px 0;
-                    "
-                  >
-                    <button
-                      style="background-color: #365679; color: white"
-                      onclick="questionSave()"
-                      class="panel-button"
-                    >
-                      Save
-                    </button>
-                    <button class="panel-button" onclick="questionCancel()">
-                      Cancel
-                    </button>
-                  </div>
+                    ">
+                  <button style="background-color: #365679; color: white" onclick="questionSave()" class="panel-button">
+                    Save
+                  </button>
+                  <button class="panel-button" onclick="questionCancel()">
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <hr />
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-1 col-sm-12">
-                <h3
-                  style="color: #464646; font-weight: bold; text-align: center"
-                  }
-                >
-                  Urls
-                </h3>
+        </div>
+        <hr />
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-1 col-sm-12">
+              <h3 style="color: #464646; font-weight: bold; text-align: center" }>
+                Urls
+              </h3>
+            </div>
+            <div class="col-md-9 col-sm-12">
+              <div class="skills" id="url_set">
+                <input class="form-control" style="display: none" id="add_url" onkeyup="urlInputHandle(event)" />
               </div>
-              <div class="col-md-9 col-sm-12">
-                <div class="skills" id="url_set">
-                  <input
-                    class="form-control"
-                    style="display: none"
-                    id="add_url"
-                    onkeyup="urlInputHandle(event)"
-                  />
-                </div>
-              </div>
-              <div
-                class="col-md-2 col-sm-12"
-                style="
+            </div>
+            <div class="col-md-2 col-sm-12" style="
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                "
-              >
-                <button
-                  onclick="showUrl()"
-                  class="application-button-container"
-                >
-                  + Add
-                </button>
-              </div>
+                ">
+              <button onclick="showUrl()" class="application-button-container">
+                + Add
+              </button>
             </div>
           </div>
-          <hr />
-          <div class="form-group">
-            <label for="conclusion">Conclusion</label>
-            <textarea id="conclusion" class="form-control" rows="4"></textarea>
-          </div>
-          <hr />
-          <div class="form-group">
-            <div
-              style="
+        </div>
+        <hr />
+        <div class="form-group">
+          <label for="conclusion">Conclusion</label>
+          <textarea id="conclusion" class="form-control" rows="4"></textarea>
+        </div>
+        <hr />
+        <div class="form-group">
+          <div style="
                 display: flex;
                 justify-content: center;
                 align-items: center;
-              "
-            >
-              <button
-                onclick="submitInfo()"
-                type="button"
-                class="btn btn-primary btn-lg"
-                id="saveBlogConfirm"
-              >
-                Submit
-              </button>
-            </div>
+              ">
+            <button onclick="submitInfo()" type="button" class="btn btn-primary btn-lg" id="saveBlogConfirm">
+              Submit
+            </button>
           </div>
         </div>
-        <div style="display: none" id="home2">
-          <div id="featured-tab"></div>
-          <span style="display: flex; justify-content: center; margin: 20px 0">
-            <button
-              type="button "
-              onclick="featureSubmit()"
-              class="btn btn-primary btn-lg"
-              id="featureSubmit"
-            >
+      </div>
+      <div style="display: none" id="home2">
+        <div id="featured-tab"></div>
+        <span style="display: flex; justify-content: center; margin: 20px 0">
+          <button type="button " onclick="featureSubmit()" class="btn btn-primary btn-lg" id="featureSubmit">
+            Save Changes
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Modal title
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <div class="form-group">
+                <label for="modal_category">Category</label>
+                <select class="form-control" id="modal_category">
+                  <option value="gadgets">Gadgets</option>
+                  <option value="colleges">Colleges</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="modal_heading_input">Heading</label>
+                <input type="email" class="form-control" id="modal_heading_input" placeholder="name@example.com" />
+              </div>
+              <div class="form-group">
+                <label for="modal_url_input">Image url</label>
+                <input type="url" class="form-control" id="modal_url_input" placeholder="name@example.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="modal_description_input">Description</label>
+                <textarea id="modal_description_input" class="form-control" rows="4"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="modal_meta_description_input">Meta Description</label>
+                <textarea id="modal_meta_description_input" class="form-control" rows="4"></textarea>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-1 col-sm-12">
+                    <h3 style="
+                          color: #464646;
+                          font-weight: bold;
+                          text-align: center;
+                        " }>
+                      Tags
+                    </h3>
+                  </div>
+                  <div class="col-md-9 col-sm-12">
+                    <div class="skills" id="modal_skills_set"></div>
+                  </div>
+                  <div class="col-md-2 col-sm-12" style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                      ">
+                    <button onclick="modalshowBut()" class="application-button-container">
+                      + Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3 col-sm-12">
+                    <h3 style="color: #464646; font-weight: bold" class="label_heading">
+                      Subheading
+                    </h3>
+                  </div>
+                  <div class="col-md-7 col-sm-12" id="modal_subheading_tabs"></div>
+                  <div class="col-md-2 col-sm-12 label-button">
+                    <button onclick="modaleditPanel()" class="application-button-container">
+                      + Add
+                    </button>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <div class="edit-panel" id="modal_edit_panel">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                          <label class="application-label">Title</label>
+                          <input class="form-control" id="modal_subheading_title" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <label class="application-label">Url</label>
+                          <input class="form-control" id="modal_subheading_url" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Description</label>
+                          <textarea id="modal_subheading_description" class="form-control" rows="6"></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Key Features(seperated by comma)</label>
+                          <textarea id="modal_subheading_key_features" class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Cons(seperated by comma)</label>
+                          <textarea id="modal_subheading_cons" class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Pros(seperated by comma)</label>
+                          <textarea id="modal_subheading_pros" class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                          <label class="application-label">Flipkart Link</label>
+                          <input class="form-control" id="modal_subheading_flipkart" />
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                          <label class="application-label">Amazon Link</label>
+                          <input class="form-control" id="modal_subheading_amazon" />
+                        </div>
+                      </div>
+
+                      <div style="
+                            display: flex;
+                            flex-direction: row-reverse;
+                            margin: 15px 0;
+                          ">
+                        <button style="background-color: #365679; color: white" onclick="modalsubheadingSave()"
+                          class="panel-button">
+                          Save
+                        </button>
+                        <button class="panel-button" onclick="modalsubheadingCancel()">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-3 col-sm-12">
+                    <h3 style="color: #464646; font-weight: bold" class="label_heading">
+                      Question
+                    </h3>
+                  </div>
+                  <div class="col-md-7 col-sm-12" id="modal_subheading_quest"></div>
+                  <div class="col-md-2 col-sm-12 label-button">
+                    <button onclick="modalquesteditPanel()" class="application-button-container">
+                      + Add
+                    </button>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <div class="edit-panel" id="modal_quest_edit_panel">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Question</label>
+                          <input class="form-control" id="modal_quest" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                          <label class="application-label">Answer</label>
+                          <textarea id="modal_ans" class="form-control" rows="3"></textarea>
+                        </div>
+                      </div>
+
+                      <div style="
+                            display: flex;
+                            flex-direction: row-reverse;
+                            margin: 15px 0;
+                          ">
+                        <button style="background-color: #365679; color: white" onclick="modalquestionSave()"
+                          class="panel-button">
+                          Save
+                        </button>
+                        <button class="panel-button" onclick="modalquestionCancel()">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-1 col-sm-12">
+                    <h3 style="
+                          color: #464646;
+                          font-weight: bold;
+                          text-align: center;
+                        " }>
+                      Urls
+                    </h3>
+                  </div>
+                  <div class="col-md-9 col-sm-12">
+                    <div class="skills" id="modal_url_set"></div>
+                  </div>
+                  <div class="col-md-2 col-sm-12" style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                      ">
+                    <button onclick="modalshowUrl()" class="application-button-container">
+                      + Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <label for="modal_conclusion">Conclusion</label>
+                <textarea id="modal_conclusion" class="form-control" rows="4"></textarea>
+              </div>
+              <hr />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="refreshVars()">
+              Close
+            </button>
+            <button onclick="putBlog()" id="editBlogConfirm" type="button" class="btn btn-primary">
               Save Changes
             </button>
-          </span>
-        </div>
-      </div>
-
-      <div
-        class="modal fade"
-        id="exampleModalLong"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLongTitle"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div>
-                <div class="form-group">
-                  <label for="modal_category">Category</label>
-                  <select class="form-control" id="modal_category">
-                    <option value="gadgets">Gadgets</option>
-                    <option value="colleges">Colleges</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="modal_heading_input">Heading</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="modal_heading_input"
-                    placeholder="name@example.com"
-                    disabled
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="modal_url_input">Image url</label>
-                  <input
-                    type="url"
-                    class="form-control"
-                    id="modal_url_input"
-                    placeholder="name@example.com"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label for="modal_description_input">Description</label>
-                  <textarea
-                    id="modal_description_input"
-                    class="form-control"
-                    rows="4"
-                  ></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="modal_meta_description_input"
-                    >Meta Description</label
-                  >
-                  <textarea
-                    id="modal_meta_description_input"
-                    class="form-control"
-                    rows="4"
-                  ></textarea>
-                </div>
-                <hr />
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-1 col-sm-12">
-                      <h3
-                        style="
-                          color: #464646;
-                          font-weight: bold;
-                          text-align: center;
-                        "
-                        }
-                      >
-                        Tags
-                      </h3>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                      <div class="skills" id="modal_skills_set"></div>
-                    </div>
-                    <div
-                      class="col-md-2 col-sm-12"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <button
-                        onclick="modalshowBut()"
-                        class="application-button-container"
-                      >
-                        + Add
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                      <h3
-                        style="color: #464646; font-weight: bold"
-                        class="label_heading"
-                      >
-                        Subheading
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-7 col-sm-12"
-                      id="modal_subheading_tabs"
-                    ></div>
-                    <div class="col-md-2 col-sm-12 label-button">
-                      <button
-                        onclick="modaleditPanel()"
-                        class="application-button-container"
-                      >
-                        + Add
-                      </button>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                      <div class="edit-panel" id="modal_edit_panel">
-                        <div class="row">
-                          <div class="col-md-6 col-sm-12">
-                            <label class="application-label">Title</label>
-                            <input
-                              class="form-control"
-                              id="modal_subheading_title"
-                            />
-                          </div>
-
-                          <div class="col-md-6 col-sm-12">
-                            <label class="application-label">Url</label>
-                            <input
-                              class="form-control"
-                              id="modal_subheading_url"
-                            />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label">Description</label>
-                            <textarea
-                              id="modal_subheading_description"
-                              class="form-control"
-                              rows="6"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label"
-                              >Key Features(seperated by comma)</label
-                            >
-                            <textarea
-                              id="modal_subheading_key_features"
-                              class="form-control"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label"
-                              >Cons(seperated by comma)</label
-                            >
-                            <textarea
-                              id="modal_subheading_cons"
-                              class="form-control"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label"
-                              >Pros(seperated by comma)</label
-                            >
-                            <textarea
-                              id="modal_subheading_pros"
-                              class="form-control"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6 col-sm-12">
-                            <label class="application-label"
-                              >Flipkart Link</label
-                            >
-                            <input
-                              class="form-control"
-                              id="modal_subheading_flipkart"
-                            />
-                          </div>
-
-                          <div class="col-md-6 col-sm-12">
-                            <label class="application-label">Amazon Link</label>
-                            <input
-                              class="form-control"
-                              id="modal_subheading_amazon"
-                            />
-                          </div>
-                        </div>
-
-                        <div
-                          style="
-                            display: flex;
-                            flex-direction: row-reverse;
-                            margin: 15px 0;
-                          "
-                        >
-                          <button
-                            style="background-color: #365679; color: white"
-                            onclick="modalsubheadingSave()"
-                            class="panel-button"
-                          >
-                            Save
-                          </button>
-                          <button
-                            class="panel-button"
-                            onclick="modalsubheadingCancel()"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                      <h3
-                        style="color: #464646; font-weight: bold"
-                        class="label_heading"
-                      >
-                        Question
-                      </h3>
-                    </div>
-                    <div
-                      class="col-md-7 col-sm-12"
-                      id="modal_subheading_quest"
-                    ></div>
-                    <div class="col-md-2 col-sm-12 label-button">
-                      <button
-                        onclick="modalquesteditPanel()"
-                        class="application-button-container"
-                      >
-                        + Add
-                      </button>
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                      <div class="edit-panel" id="modal_quest_edit_panel">
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label">Question</label>
-                            <input class="form-control" id="modal_quest" />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-sm-12">
-                            <label class="application-label">Answer</label>
-                            <textarea
-                              id="modal_ans"
-                              class="form-control"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                        </div>
-
-                        <div
-                          style="
-                            display: flex;
-                            flex-direction: row-reverse;
-                            margin: 15px 0;
-                          "
-                        >
-                          <button
-                            style="background-color: #365679; color: white"
-                            onclick="modalquestionSave()"
-                            class="panel-button"
-                          >
-                            Save
-                          </button>
-                          <button
-                            class="panel-button"
-                            onclick="modalquestionCancel()"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-md-1 col-sm-12">
-                      <h3
-                        style="
-                          color: #464646;
-                          font-weight: bold;
-                          text-align: center;
-                        "
-                        }
-                      >
-                        Urls
-                      </h3>
-                    </div>
-                    <div class="col-md-9 col-sm-12">
-                      <div class="skills" id="modal_url_set"></div>
-                    </div>
-                    <div
-                      class="col-md-2 col-sm-12"
-                      style="
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                      "
-                    >
-                      <button
-                        onclick="modalshowUrl()"
-                        class="application-button-container"
-                      >
-                        + Add
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="form-group">
-                  <label for="modal_conclusion">Conclusion</label>
-                  <textarea
-                    id="modal_conclusion"
-                    class="form-control"
-                    rows="4"
-                  ></textarea>
-                </div>
-                <hr />
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                onclick="refreshVars()"
-              >
-                Close
-              </button>
-              <button
-                onclick="putBlog()"
-                id="editBlogConfirm"
-                type="button"
-                class="btn btn-primary"
-              >
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="modal fade"
-        id="subModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg"
-          role="document"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-6 col-sm-12">
-                  <label class="application-label">Title</label>
-                  <input class="form-control" id="modals_title" />
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                  <label class="application-label">Url</label>
-                  <input class="form-control" id="modals_url" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label">Description</label>
-                  <textarea
-                    id="modals_description"
-                    class="form-control"
-                    rows="6"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label"
-                    >Key Features(seperated by comma)</label
-                  >
-                  <textarea
-                    id="modals_key_features"
-                    class="form-control"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label"
-                    >Pros(seperated by comma)</label
-                  >
-                  <textarea
-                    id="modals_pros"
-                    class="form-control"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label"
-                    >Cons(seperated by comma)</label
-                  >
-                  <textarea
-                    id="modals_cons"
-                    class="form-control"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 col-sm-12">
-                  <label class="application-label">Flipkart Link</label>
-                  <input class="form-control" id="modals_flipkart" />
-                </div>
-
-                <div class="col-md-6 col-sm-12">
-                  <label class="application-label">Amazon Link</label>
-                  <input class="form-control" id="modals_amazon" />
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-dismiss="modal"
-                onclick="subModalSave()"
-              >
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="modal fade"
-        id="deleteModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-sm"
-          role="document"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Are you sure?</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <span> Deleting Blog:-</span>
-              <h3 id="deleteblogname"></h3>
-            </div>
-
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                onclick="deleteBlogConfirm()"
-                class="btn btn-primary"
-                id="deleteBlogConfirm"
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="modal fade"
-        id="confirmmodal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-sm"
-          role="document"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Do you want to navigate ?</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Kindly submit the changes before leaving or your data will be lost
-            </div>
-
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Submit first
-              </button>
-              <button
-                type="button"
-                data-dismiss="modal"
-                onclick="clearThings()"
-                class="btn btn-primary"
-              >
-                Navigate
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="modal fade"
-        id="questModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg"
-          role="document"
-        >
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label">Question</label>
-                  <input class="form-control" id="modals_quest" />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <label class="application-label">Answer</label>
-                  <textarea
-                    id="modals_ans"
-                    class="form-control"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                onclick="questModalSave()"
-                class="btn btn-primary"
-                data-dismiss="modal"
-              >
-                Save changes
-              </button>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+    <div class="modal fade" id="subModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Modal title
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <label class="application-label">Title</label>
+                <input class="form-control" id="modals_title" />
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <label class="application-label">Url</label>
+                <input class="form-control" id="modals_url" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Description</label>
+                <textarea id="modals_description" class="form-control" rows="6"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Key Features(seperated by comma)</label>
+                <textarea id="modals_key_features" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Pros(seperated by comma)</label>
+                <textarea id="modals_pros" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Cons(seperated by comma)</label>
+                <textarea id="modals_cons" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <label class="application-label">Flipkart Link</label>
+                <input class="form-control" id="modals_flipkart" />
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <label class="application-label">Amazon Link</label>
+                <input class="form-control" id="modals_amazon" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="subModalSave()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Are you sure?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <span> Deleting Blog:-</span>
+            <h3 id="deleteblogname"></h3>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" onclick="deleteBlogConfirm()" class="btn btn-primary" id="deleteBlogConfirm">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="confirmmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Do you want to navigate ?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Kindly submit the changes before leaving or your data will be lost
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Submit first
+            </button>
+            <button type="button" data-dismiss="modal" onclick="clearThings()" class="btn btn-primary">
+              Navigate
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="questModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Modal title
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Question</label>
+                <input class="form-control" id="modals_quest" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+                <label class="application-label">Answer</label>
+                <textarea id="modals_ans" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" onclick="questModalSave()" class="btn btn-primary" data-dismiss="modal">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
