@@ -2,6 +2,7 @@ var heading,
   conclusion,
   description,
   imageUrl,
+  username,
   blog_name,
   index_value,
   meta_description,
@@ -436,6 +437,7 @@ const putBlog = async () => {
   category = $("#modal_category").val();
   heading = $("#modal_heading_input").val();
   imageUrl = $("#modal_url_input").val();
+  username = $("#modal_author_input").val();
   description = $("#modal_description_input").val();
   meta_description = $("#modal_meta_description_input").val();
   conclusion = $("#modal_conclusion").val();
@@ -444,6 +446,7 @@ const putBlog = async () => {
     `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?blog=${blog_name}`,
     {
       category,
+      username,
       heading,
       imageUrl,
       description,
@@ -488,6 +491,7 @@ const editBlog = async (value) => {
   subheading = data[0].subheading;
 
   $("#modal_heading_input").val(heading);
+  $("#modal_author_input").val(username);
   $("#modal_url_input").val(imageUrl);
   $("#modal_description_input").val(description);
   $("#modal_meta_description_input").val(meta_description);
@@ -913,12 +917,13 @@ const submitInfo = async () => {
   heading = $("#heading_input").val();
   imageUrl = $("#url_input").val();
   conclusion = $("#conclusion").val();
-
+  username = $("#author_input").val();
 
   const res = await axios.post(
     "https://zen-newton-5723fe.netlify.app/.netlify/functions/api/input",
     {
       category,
+      username,
       heading,
       imageUrl,
       description,
@@ -940,6 +945,7 @@ const submitInfo = async () => {
     populateData();
     $("#description_input").val("");
     $("#heading_input").val("");
+    $("#author").val("");
     $("#url_input").val("");
     refreshVars();
     cleanForm();
