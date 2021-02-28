@@ -52,11 +52,12 @@ const renderList = (arr) => {
 const handleUrl = () => {
   let rand = Math.floor(Math.random() * quotes.length);
   $("#quotes").html(quotes[rand]);
+  let string = window.location.href.replace("?", "*");
+  let query = string.split("*")[1];
+  console.log({ query, location: window.location.href });
   axios
     .get(
-      `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${replace(
-        window.location.href.split("?")[1]
-      )}`,
+      `http://localhost:9000/.netlify/functions/api/blog?heading=${replace(encodeURIComponent(query))}`,
       {
         timeout: 3000,
       }
