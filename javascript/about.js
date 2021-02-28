@@ -55,9 +55,10 @@ const handleUrl = () => {
   let string = window.location.href.replace("?", "*");
   let query = string.split("*")[1];
   console.log({ query, location: window.location.href });
+  https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?blog=${blog_name}
   axios
     .get(
-      `http://localhost:9000/.netlify/functions/api/blog?heading=${replace(encodeURIComponent(query))}`,
+      `https://zen-newton-5723fe.netlify.app/.netlify/functions/api/blog?heading=${replace(encodeURIComponent(query))}`,
       {
         timeout: 3000,
       }
